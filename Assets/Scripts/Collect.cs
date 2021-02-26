@@ -63,21 +63,22 @@ public class Collect : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("HEllo");
-        holding = true;
-        objectHolding = collision.gameObject;
-        PowerUp pw = objectHolding.GetComponent<PowerUp>();
-        if (pw != null)
+        if (collision.gameObject.CompareTag("PowerUp"))
         {
-            throwable = pw.throwable;
-            objType = pw.type;
-            pw.OnCollection();
-            switch (objType)
+            holding = true;
+            objectHolding = collision.gameObject;
+            PowerUp pw = objectHolding.GetComponent<PowerUp>();
+            if (pw != null)
             {
-                case "box":
-                    objectHolding.GetComponent<Box>().player = gameObject;
-                    Debug.Log(2);
-                    break;
+                throwable = pw.throwable;
+                objType = pw.type;
+                pw.OnCollection();
+                switch (objType)
+                {
+                    case "box":
+                        objectHolding.GetComponent<Box>().player = gameObject;
+                        break;
+                }
             }
         }
     }

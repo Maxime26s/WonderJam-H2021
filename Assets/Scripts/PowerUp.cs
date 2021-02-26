@@ -14,7 +14,6 @@ public class PowerUp : MonoBehaviour
     public void OnCollection()
     {
         gameObject.SetActive(false);
-        Debug.Log(3);
         //Ajouter au UI
     }
 }
