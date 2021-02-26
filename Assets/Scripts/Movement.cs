@@ -4,37 +4,54 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float rayon, tempsMaxCharge, force, forceMultiplier;
+    public float rayon, tempsMaxCharge, force, forceMultiplier, offsetFleche, flecheMinScale, flecheMaxScale;
     public GameObject fleche;
-    public bool charge;
+    public bool isCharging;
     public float chargeStartTime, pourcent;
     public Rigidbody2D rb;
+    SpriteRenderer flecheSpriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        flecheSpriteRenderer = fleche.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+        Vector2 direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        if (direction.magnitude < 0.3)
+            fleche.SetActive(false);
+        else
+        {
+            fleche.SetActive(true);
+        }
+
+        direction = direction.normalized;
+
         fleche.transform.localPosition = direction * rayon;
-        fleche.transform.rotation = Quaternion.Euler(0,0,Mathf.Rad2Deg * Mathf.Atan2(direction.y,direction.x) - 90);
-        pourcent = (Time.time - chargeStartTime) / tempsMaxCharge;
+        fleche.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x) - offsetFleche);
+        if (isCharging)
+        {
+            pourcent = (Time.time - chargeStartTime) / tempsMaxCharge;
+            pourcent = pourcent >= 1 ? 1 : pourcent;
+            flecheSpriteRenderer.color = Color.Lerp(Color.green, Color.red, pourcent);
+            fleche.transform.localScale = new Vector3(flecheMinScale + (flecheMaxScale - flecheMinScale) * pourcent, fleche.transform.localScale.y, fleche.transform.localScale.x);
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            charge = true;
+            isCharging = true;
             chargeStartTime = Time.time;
         }
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            charge = false;
-            float chargeEndTime = Time.time;
-            float chargeTime = chargeEndTime - chargeStartTime;
-            float chargeForce = chargeTime >= tempsMaxCharge ? 1 : chargeTime / tempsMaxCharge;
-            rb.AddForce(direction * chargeForce * force * forceMultiplier);
+            isCharging = false;
+            rb.AddForce(direction * pourcent * force * forceMultiplier);
+
+            flecheSpriteRenderer.color = Color.white;
+            pourcent = 0;
+            fleche.transform.localScale = new Vector3(flecheMinScale, fleche.transform.localScale.y, fleche.transform.localScale.z);
         }
     }
 }
