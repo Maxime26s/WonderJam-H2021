@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: stonepatterntoprightcorner
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 1a863ed513bd45949bc7e3f04c85a351, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 72ad25d7a8436eb42ad35a77694a50a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
