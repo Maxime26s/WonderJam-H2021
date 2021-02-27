@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1871168981945521630}
   - component: {fileID: 3339724022237280560}
   m_Layer: 0
-  m_Name: CollisionParticles
+  m_Name: CollisionParticles 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -222,8 +222,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.754717, g: 0.004746554, b: 0.004746554, a: 1}
-      maxColor: {r: 1, g: 0.34591186, b: 0.34591186, a: 1}
+      minColor: {r: 0.015574837, g: 0.16724007, b: 0.990566, a: 1}
+      maxColor: {r: 0.14779866, g: 0.63210857, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
