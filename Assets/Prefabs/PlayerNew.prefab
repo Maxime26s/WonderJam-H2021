@@ -277,11 +277,11 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 0.5
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6f5ef53d26575f944921a471439d9111, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -314,6 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a42d32d4905da314dad378db459d7d60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cash: 0
 --- !u!114 &2620572418335838609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,7 +474,7 @@ MonoBehaviour:
   collisionParticles2: {fileID: 7328194476159081241, guid: b27f4b036c9a5264d947696994f7598a, type: 3}
   deathParticles: {fileID: 7772992199544801446, guid: 9430a0d2456db5e4089241c15858a26e, type: 3}
   isCharging: 0
-  chargeStartTime: 62
+  chargeStartTime: 19.997608
   pourcent: 0
   rb: {fileID: 2779019129606050035}
   flecheSpriteRenderer: {fileID: 2779019130202987033}
