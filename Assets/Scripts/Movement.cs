@@ -11,20 +11,6 @@ public class Movement : MonoBehaviour
     public Rigidbody2D rb;
     SpriteRenderer flecheSpriteRenderer;
 
-    public KeyCode up;
-    public KeyCode down;
-    public KeyCode left;
-    public KeyCode right;
-    public KeyCode move;
-    public KeyCode usePU;
-
-    public KeyCode upController;
-    public KeyCode downController;
-    public KeyCode leftController;
-    public KeyCode rightController;
-    public KeyCode moveController;
-    public KeyCode usePUController;
-
     // Start is called before the first frame update
     void Start()
     {
