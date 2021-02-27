@@ -34,7 +34,8 @@ public class VisionCamera : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), range, layerMask);
             Debug.DrawRay(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * range, Color.green);
             if (hit.collider != null && hit.collider.tag == "Player")
-                GameManager.Instance.SuperAlert(hit.collider.transform);
+                if(!GameManager.Instance.isSuperAlert)
+                    GameManager.Instance.SuperAlert(hit.collider.transform);
         }
     }
 
