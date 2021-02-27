@@ -29,7 +29,7 @@ public class LevelLoader : MonoBehaviour
         if(SceneManager.GetSceneByBuildIndex(levelIndex).name == "Lobby")
         {
             SceneManager.LoadScene("PlayerInfo", LoadSceneMode.Additive); //Has UI and player stats
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName("PlayerInfo"));
+            Debug.Log("Ready");
         }
     }
 

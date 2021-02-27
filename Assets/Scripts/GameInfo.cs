@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameInfo : MonoBehaviour
 {
@@ -18,24 +19,19 @@ public class GameInfo : MonoBehaviour
     }
 
     public List<GameObject> players = new List<GameObject>();
-    public GameObject texteP1, texteP2, p1guy, p2guy;
+    public LobbyScript lobbyScript;
+    public bool started = false;
+    
     public void AddPlayer(GameObject player)
     {
         players.Add(player);
-        switch (players.Count)
-        {
-            case 1:
-                Destroy(texteP1);
-                p1guy.SetActive(true);
-                break;
-            case 2:
-                Destroy(texteP2);
-                p2guy.SetActive(true);
-                break;
-            default:
-                Debug.Log("FAI LWATHFASDFDSA");
-                break;
-        }
+        lobbyScript.Login(players.Count);
     }
 
+    private void Start()
+    {
+        lobbyScript = GameObject.Find("LobbyScript").GetComponent<LobbyScript>();
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("PlayerInfo"));
+        Debug.Log("Ready2");
+    }
 }
