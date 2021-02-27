@@ -26,8 +26,20 @@ public class LevelLoader : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
 
         SceneManager.LoadScene(levelIndex);
-        if(SceneManager.GetSceneByBuildIndex(levelIndex).name == "Prologue")
+        if(SceneManager.GetSceneByBuildIndex(levelIndex).name == "Lobby")
+        {
             SceneManager.LoadScene("PlayerInfo", LoadSceneMode.Additive); //Has UI and player stats
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("PlayerInfo"));
+        }
+    }
+
+    IEnumerator BackToMenu()
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene("Menu");
     }
 
     IEnumerator LoadLevelAdditive(int levelIndex)
@@ -37,7 +49,11 @@ public class LevelLoader : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
 
         string oldSceneName = SceneManager.GetActiveScene().name;
-
+        if(oldSceneName == "PlayerInfo")
+        {
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("Lobby"));
+            oldSceneName = SceneManager.GetActiveScene().name;
+        }
         SceneManager.LoadScene(levelIndex, LoadSceneMode.Additive); //Has UI and player score
         yield return new WaitForSeconds(0.1f);
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneManager.GetSceneByBuildIndex(levelIndex).name));
