@@ -24,7 +24,3 @@ EditorBuildSettings:
     path: Assets/Scenes/Tryhard/Test2.unity
     guid: 54c745b7c8752ab4fbaae717aca26e89
   m_configObjects: {}
-    path: Assets/Scenes/SampleScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
-  m_configObjects:
-    com.unity.input.settings: {fileID: 11400000, guid: 50dd1911d6bbbce44bf656d4c9c6be98, type: 2}
