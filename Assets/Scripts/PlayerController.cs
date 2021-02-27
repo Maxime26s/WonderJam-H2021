@@ -125,8 +125,14 @@ public class PlayerController : MonoBehaviour
                 switch (objType)
                 {
                     case "box":
-                        objectHolding.GetComponent<Box>().Use(direction * pourcent * force * forceMultiplier, fleche);
+                        objectHolding.GetComponent<Box>().Use(direction * 1 * force * forceMultiplier, fleche);
                         objectHolding.GetComponent<PowerUp>().SetUsed();
+                        break;
+                    case "firework":
+                        objectHolding.GetComponent<Firework>().Use(direction * 1 * force * forceMultiplier, fleche);
+                        objectHolding.GetComponent<PowerUp>().SetUsed();
+                        break;
+                    default:
                         break;
                 }
                 flecheSpriteRenderer.color = Color.white;
