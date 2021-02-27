@@ -480,6 +480,8 @@ MonoBehaviour:
   flecheSpriteRenderer: {fileID: 2779019130202987033}
   playerNum: 0
   ball: {fileID: 314201785}
+  ballController: {fileID: 9100000, guid: 33049e4cfb7b8b24cbe19ad12bf7227c, type: 2}
+  playerController: {fileID: 9100000, guid: fe2d2d7972a5ee943bf68258076b9515, type: 2}
 --- !u!95 &369421604
 Animator:
   serializedVersion: 3

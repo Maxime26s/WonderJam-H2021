@@ -56,6 +56,8 @@ public class PlayerController : MonoBehaviour
                 playerAnimator.runtimeAnimatorController = playerController;
             }
         }
+
+        StartCoroutine(WaitAndSetupPlayer2());
     }
 
     private void Update()
