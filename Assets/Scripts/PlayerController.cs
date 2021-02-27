@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public SpriteRenderer flecheSpriteRenderer;
     public PlayerEnum playerNum = PlayerEnum.One;
+    public GameObject ball;
     Vector2 direction;
 
     //Collect
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
     private GameObject objectHolding;
     string objType;
     bool throwable;
+    private Animator ballAnimator;
+    private Animator playerAnimator;
 
     private void Awake()
     {
@@ -31,6 +34,8 @@ public class PlayerController : MonoBehaviour
         //flecheSpriteRenderer = fleche.GetComponent<SpriteRenderer>();
         cc2d = GetComponent<CircleCollider2D>();
         flecheSpriteRenderer = fleche.GetComponent<SpriteRenderer>();
+        ballAnimator = ball.GetComponent<Animator>();
+        playerAnimator = gameObject.GetComponent<Animator>();
         //fleche.SetActive(false);
         try
         {
@@ -50,6 +55,29 @@ public class PlayerController : MonoBehaviour
             pourcent = pourcent >= 1 ? 1 : pourcent;
             flecheSpriteRenderer.color = Color.Lerp(Color.green, Color.red, pourcent);
             fleche.transform.localScale = new Vector3(flecheMinScale + (flecheMaxScale - flecheMinScale) * pourcent, fleche.transform.localScale.y, fleche.transform.localScale.x);
+        }
+
+        Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg - 90);
+        if (rb.velocity.magnitude > 0)
+            ball.transform.rotation = rotation;
+
+        if (rb.velocity.x >= 0)
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        else
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
+
+        ballAnimator.speed = rb.velocity.magnitude / 2;
+
+        if (rb.velocity.magnitude > 0.1)
+        {
+            playerAnimator.SetBool("Running", true);
+            playerAnimator.speed = rb.velocity.magnitude / 2;
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, 0);
+            playerAnimator.speed = 1;
+            playerAnimator.SetBool("Running", false);
         }
     }
 
