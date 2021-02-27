@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     List<GameObject> players = new List<GameObject>();
     public List<GameObject> enemies = new List<GameObject>();
     public bool isSuperAlert = false;
+    public GameObject policeEffect;
 
     public void SuperAlert(Transform transform)
     {
@@ -31,12 +32,14 @@ public class GameManager : MonoBehaviour
             {
                 enemy.GetComponent<EnemyAI>().target = transform;
             }
+            policeEffect.SetActive(true);
             yield return new WaitForSeconds(8f);
             isSuperAlert = false;
             foreach (GameObject enemy in enemies)
             {
                 enemy.GetComponent<EnemyAI>().target = enemy.GetComponent<EnemyAI>().route[enemy.GetComponent<EnemyAI>().routeIndex];
             }
+            policeEffect.SetActive(false);
         }
         StartCoroutine(SuperDuperAlertTimer());
     }
