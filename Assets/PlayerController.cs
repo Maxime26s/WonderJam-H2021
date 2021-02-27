@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.Log("fail");
+            Debug.Log(e.Message);
         }
     }
 
@@ -77,6 +77,19 @@ public class PlayerController : MonoBehaviour
 
     public void Use(InputAction.CallbackContext ctx)
     {
+        try
+        {
+            if (!GameInfo.Instance.started)
+            {
+                GameInfo.Instance.started = true;
+                GameInfo.Instance.lobbyScript.StartGame();
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
+
         if (!isCharging && ctx.performed)
         {
             if (holding && objectHolding.GetComponent<PowerUp>().throwable)
