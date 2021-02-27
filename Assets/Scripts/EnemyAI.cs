@@ -67,8 +67,8 @@ public class EnemyAI : MonoBehaviour
         Vector2 force = direction * speed * Time.deltaTime;
 
         rb.AddForce(force);
-        if (rb.velocity.magnitude > 100)
-            rb.velocity = rb.velocity.normalized * 100;
+        if (rb.velocity.magnitude > maxSpeed)
+            rb.velocity = chasing ? rb.velocity.normalized * maxSpeed : rb.velocity.normalized * maxSpeed / 2f;
 
         transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(rb.velocity.y, rb.velocity.x));
 
