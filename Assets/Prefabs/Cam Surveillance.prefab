@@ -203,7 +203,7 @@ MonoBehaviour:
   fov: 45
   layerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 72
   lastHitTime: 0
   rotationAngle: 30
   speed: 30
