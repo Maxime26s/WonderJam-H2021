@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,6 +37,14 @@ public class PlayerController : MonoBehaviour
         ballAnimator = ball.GetComponent<Animator>();
         playerAnimator = gameObject.GetComponent<Animator>();
         //fleche.SetActive(false);
+        try
+        {
+            GameInfo.Instance.AddPlayer(gameObject);
+        }
+        catch (Exception e)
+        {
+            Debug.Log("fail");
+        }
     }
 
     private void Update()
@@ -78,7 +87,6 @@ public class PlayerController : MonoBehaviour
         {
             isCharging = true;
             chargeStartTime = Time.time;
-            Debug.Log(ctx.performed);
         }
     }
 
@@ -86,7 +94,6 @@ public class PlayerController : MonoBehaviour
     {
         if (isCharging && ctx.performed)
         {
-            Debug.Log(ctx.performed);
             isCharging = false;
             rb.AddForce(direction * pourcent * force * forceMultiplier);
 
