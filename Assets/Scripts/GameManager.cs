@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
             GoNext();
     }
 
-    private void GoNext()
+    public void GoNext()
     {
         loader.LoadNextLevelAdditive(SceneManager.GetActiveScene().buildIndex + 1);
     }
