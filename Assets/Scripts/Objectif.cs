@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Objectif : MonoBehaviour
 {
+    public float money;
     // Start is called before the first frame update
     void Start()
     {
