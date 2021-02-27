@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    List<GameObject> players = new List<GameObject>();
+    public GameObject spawn1, spawn2;
     public List<GameObject> enemies = new List<GameObject>();
     public bool isSuperAlert = false;
     public GameObject policeEffect;
