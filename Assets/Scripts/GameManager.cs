@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> loot = new List<GameObject>();
     public int collected;
     public bool isSuperAlert = false;
-    public GameObject policeEffect;
+    public GameObject policeEffect1, policeEffect2;
 
     public void SuperAlert(Transform transform)
     {
@@ -36,14 +37,16 @@ public class GameManager : MonoBehaviour
             {
                 enemy.GetComponent<EnemyAI>().target = transform;
             }
-            policeEffect.SetActive(true);
+            policeEffect1.SetActive(true);
+            policeEffect2.SetActive(true);
             yield return new WaitForSeconds(8f);
             isSuperAlert = false;
             foreach (GameObject enemy in enemies)
             {
                 enemy.GetComponent<EnemyAI>().target = enemy.GetComponent<EnemyAI>().route[enemy.GetComponent<EnemyAI>().routeIndex];
             }
-            policeEffect.SetActive(false);
+            policeEffect1.SetActive(false);
+            policeEffect2.SetActive(false);
         }
         StartCoroutine(SuperDuperAlertTimer());
     }
@@ -57,5 +60,22 @@ public class GameManager : MonoBehaviour
     public void GoNext()
     {
         loader.LoadNextLevelAdditive(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    private void OnEnable()
+    {
+        try
+        {
+            policeEffect1 = GameObject.Find("P2").transform.GetChild(1).gameObject;
+            policeEffect2 = GameObject.Find("P2").transform.GetChild(0).gameObject;
+        }
+        catch(Exception e)
+        {
+            Debug.Log(e.Message);
+        }
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        players[0].transform.position = spawn1.transform.position;
+        players[1].transform.position = spawn2.transform.position;
     }
 }

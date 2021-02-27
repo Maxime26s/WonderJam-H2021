@@ -5,8 +5,8 @@ using UnityEngine;
 public class ColObjectives : MonoBehaviour
 {
     public float cash = 0;
-    bool holdingObjective = false;
-    GameObject objective;
+    public bool holdingObjective = false;
+    public GameObject objective;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(objective);
