@@ -45,10 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.293
-  m_Color: {r: 1, g: 0, b: 1, a: 1}
-  m_Intensity: 1
-  m_LightVolumeOpacity: 0.272
+  m_FalloffIntensity: 0.4
+  m_Color: {r: 0.2784314, g: 1, b: 0.4, a: 1}
+  m_Intensity: 0.75
+  m_LightVolumeOpacity: 0.2
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 0
   m_PointLightOuterAngle: 90
-  m_PointLightInnerRadius: 1
+  m_PointLightInnerRadius: 0
   m_PointLightOuterRadius: 20
   m_PointLightDistance: 3
   m_PointLightQuality: 1
@@ -187,9 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  route:
-  - {fileID: 0}
-  - {fileID: 0}
+  route: []
   routeIndex: 0
   chasing: 0
   distanceminmaxthing: 7.5
@@ -216,6 +214,9 @@ MonoBehaviour:
     m_Bits: 72
   rb: {fileID: 8399145325160440909}
   lastHitTime: 0
+  colorIdle: {r: 0.2784314, g: 1, b: 0.4, a: 1}
+  colorFound: {r: 1, g: 0.30980393, b: 0.2784314, a: 1}
+  lightVision: {fileID: 8399145324349616823}
 --- !u!1 &8399145326097565848
 GameObject:
   m_ObjectHideFlags: 0
