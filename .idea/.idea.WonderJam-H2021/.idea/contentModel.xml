@@ -57,6 +57,7 @@
           </e>
           <e p="Fonts" t="Include">
             <e p="LiberationSans - OFL.txt" t="Include" />
+            <e p="TOP GUN font.txt" t="Include" />
           </e>
           <e p="Resources" t="Include">
             <e p="LineBreaking Following Characters.txt" t="Include" />
