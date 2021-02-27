@@ -46,7 +46,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.293
-  m_Color: {r: 0.24438477, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.8440816, b: 0.27843142, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0.272
   m_ApplyToSortingLayers: 00000000
@@ -203,7 +203,10 @@ MonoBehaviour:
   fov: 45
   layerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 72
   lastHitTime: 0
   rotationAngle: 30
   speed: 30
+  colorIdle: {r: 1, g: 0.84313726, b: 0.2784314, a: 1}
+  colorFound: {r: 1, g: 0.30980393, b: 0.2784314, a: 1}
+  lightVision: {fileID: 6999892168451083169}

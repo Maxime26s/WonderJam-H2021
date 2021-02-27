@@ -26,7 +26,7 @@ public class Collect : MonoBehaviour
 
     void Update()
     {
-        if(holding && objectHolding.GetComponent<PowerUp>().throwable)
+        if (holding && objectHolding.GetComponent<PowerUp>().throwable)
         {
             Vector2 direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             if (isCharging)

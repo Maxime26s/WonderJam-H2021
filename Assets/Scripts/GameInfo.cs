@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.Universal;
+using Cinemachine;
 
 public class GameInfo : MonoBehaviour
 {
@@ -18,24 +21,51 @@ public class GameInfo : MonoBehaviour
     }
 
     public List<GameObject> players = new List<GameObject>();
-    public GameObject texteP1, texteP2, p1guy, p2guy;
+    public LobbyScript lobbyScript;
+    public bool started = false;
+    public CinemachineVirtualCamera vcam1, vcam2;
+    public Camera cam1, cam2;
+    public Camera overlaycam;
+
     public void AddPlayer(GameObject player)
     {
         players.Add(player);
+        lobbyScript.Login(players.Count);
         switch (players.Count)
         {
             case 1:
-                Destroy(texteP1);
-                p1guy.SetActive(true);
+                player.GetComponent<PlayerController>().playerNum = PlayerEnum.One;
+                vcam1.Follow = player.transform;
+                cam1.gameObject.SetActive(false);
+                cam1.gameObject.SetActive(true);
                 break;
             case 2:
-                Destroy(texteP2);
-                p2guy.SetActive(true);
+                player.GetComponent<PlayerController>().playerNum = PlayerEnum.Two;
+                vcam2.Follow = player.transform;
+                cam2.gameObject.SetActive(false);
+                cam2.gameObject.SetActive(true);
                 break;
-            default:
-                Debug.Log("FAI LWATHFASDFDSA");
-                break;
+
         }
     }
 
+    private void Start()
+    {
+        lobbyScript = GameObject.Find("LobbyScript").GetComponent<LobbyScript>();
+        lobbyScript.gameInfo = this;
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("PlayerInfo"));
+        Debug.Log("Ready2");
+    }
+
+    public void CheckCams()
+    {
+        /*
+        if (players.Count != 2)
+        {
+            cam1.rect = new Rect(0, 0, 0, 0);
+            cam2.gameObject.GetComponent<UniversalAdditionalCameraData>().cameraStack.Remove(overlaycam);
+            Destroy(cam2.gameObject);
+            Destroy(vcam2.gameObject);
+        }*/
+    }
 }

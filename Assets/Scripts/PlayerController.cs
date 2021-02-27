@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer flecheSpriteRenderer;
     public PlayerEnum playerNum = PlayerEnum.One;
     public GameObject ball;
+    public RuntimeAnimatorController ballController, playerController;
+    public Color color2;
     Vector2 direction;
 
     //Collect
@@ -30,20 +33,31 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        //fleche.SetActive(true);
-        //flecheSpriteRenderer = fleche.GetComponent<SpriteRenderer>();
         cc2d = GetComponent<CircleCollider2D>();
         flecheSpriteRenderer = fleche.GetComponent<SpriteRenderer>();
         ballAnimator = ball.GetComponent<Animator>();
-        playerAnimator = gameObject.GetComponent<Animator>();
-        //fleche.SetActive(false);
+        playerAnimator = GetComponent<Animator>();
+
+        IEnumerator WaitAndSetupPlayer2()
+        {
+            yield return new WaitForSeconds(0.1f);
+            if(playerNum == PlayerEnum.Two)
+            {
+                ballAnimator.runtimeAnimatorController = ballController;
+                playerAnimator.runtimeAnimatorController = playerController;
+                GetComponentInChildren<Light2D>().color = color2;
+            }
+        }
+
+        StartCoroutine(WaitAndSetupPlayer2());
+
         try
         {
             GameInfo.Instance.AddPlayer(gameObject);
         }
         catch (Exception e)
         {
-            Debug.Log("fail");
+            Debug.Log(e.Message);
         }
     }
 
@@ -105,6 +119,19 @@ public class PlayerController : MonoBehaviour
 
     public void Use(InputAction.CallbackContext ctx)
     {
+        try
+        {
+            if (!GameInfo.Instance.started)
+            {
+                GameInfo.Instance.started = true;
+                GameInfo.Instance.lobbyScript.StartGame();
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
+
         if (!isCharging && ctx.performed)
         {
             if (holding && objectHolding.GetComponent<PowerUp>().throwable)
@@ -231,10 +258,10 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+}
 
-    public enum PlayerEnum
-    {
-        One,
-        Two,
-    }
+public enum PlayerEnum
+{
+    One,
+    Two,
 }

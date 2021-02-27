@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class VisionCamera : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class VisionCamera : MonoBehaviour
     public float rotationAngle, speed;
     float actualAngle, startAngle, maxAngle, minAngle;
     bool reverse = false;
+    public Color colorIdle, colorFound;
+    public Light2D lightVision;
 
     // Start is called before the first frame update
     void Awake()
@@ -24,6 +27,10 @@ public class VisionCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.isSuperAlert)
+            lightVision.color = colorFound;
+        else
+            lightVision.color = colorIdle;
         Rotation();
 
         float startAngle = (Mathf.Rad2Deg * Mathf.Atan2(transform.right.y, transform.right.x) - fov / 2) * Mathf.Deg2Rad;
@@ -34,7 +41,7 @@ public class VisionCamera : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), range, layerMask);
             Debug.DrawRay(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * range, Color.green);
             if (hit.collider != null && hit.collider.tag == "Player")
-                if(!GameManager.Instance.isSuperAlert)
+                if (!GameManager.Instance.isSuperAlert)
                     GameManager.Instance.SuperAlert(hit.collider.transform);
         }
     }
