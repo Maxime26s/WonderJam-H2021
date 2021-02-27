@@ -82,10 +82,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2779019129606050033}
   - component: {fileID: 2779019129606049998}
-  - component: {fileID: 2779019129606050032}
   - component: {fileID: 2779019129606050035}
   - component: {fileID: 2620572418335838612}
-  - component: {fileID: 2620572418335838615}
   - component: {fileID: 2620572418335838614}
   - component: {fileID: 2620572418335838609}
   - component: {fileID: 2779019129606049993}
@@ -163,42 +161,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2779019129606050032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2779019129606049999}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4abb85e19a12bc0478a38a2b9f741d51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rayon: 3
-  tempsMaxCharge: 1
-  force: 1000
-  forceMultiplier: 1
-  offsetFleche: 0
-  flecheMinScale: 1
-  flecheMaxScale: 3
-  fleche: {fileID: 2779019130202987030}
-  isCharging: 0
-  chargeStartTime: 0
-  pourcent: 0
-  rb: {fileID: 2779019129606050035}
-  up: 0
-  down: 0
-  left: 0
-  right: 0
-  move: 0
-  usePU: 0
-  upController: 0
-  downController: 0
-  leftController: 0
-  rightController: 0
-  moveController: 0
-  usePUController: 0
 --- !u!50 &2779019129606050035
 Rigidbody2D:
   serializedVersion: 4
@@ -236,29 +198,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &2620572418335838615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2779019129606049999}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3939c98433f99ce4a9309a85ff97863e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rayon: 3
-  tempsMaxCharge: 1
-  force: 1000
-  forceMultiplier: 1
-  offsetFleche: 0
-  flecheMinScale: 1
-  flecheMaxScale: 3
-  fleche: {fileID: 2779019130202987030}
-  isCharging: 0
-  chargeStartTime: 0
-  pourcent: 0
 --- !u!114 &2620572418335838614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,11 +365,15 @@ MonoBehaviour:
   flecheMinScale: 1
   flecheMaxScale: 3
   fleche: {fileID: 2779019130202987030}
+  collisionParticles1: {fileID: 7328194476159081241, guid: 072ba9d5dc0467548abbb6e891874b21, type: 3}
+  collisionParticles2: {fileID: 7328194476159081241, guid: b27f4b036c9a5264d947696994f7598a, type: 3}
+  deathParticles: {fileID: 7772992199544801446, guid: 9430a0d2456db5e4089241c15858a26e, type: 3}
   isCharging: 0
-  chargeStartTime: 77.99836
+  chargeStartTime: 16.136091
   pourcent: 0
   rb: {fileID: 2779019129606050035}
   flecheSpriteRenderer: {fileID: 2779019130202987033}
+  playerNum: 0
 --- !u!1 &2779019130202987030
 GameObject:
   m_ObjectHideFlags: 0

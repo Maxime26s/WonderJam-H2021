@@ -9,11 +9,12 @@ public class PlayerController : MonoBehaviour
     public PlayerInput playerInput;
 
     public float rayon, tempsMaxCharge, force, forceMultiplier, offsetFleche, flecheMinScale, flecheMaxScale;
-    public GameObject fleche;
+    public GameObject fleche, collisionParticles1, collisionParticles2, deathParticles;
     public bool isCharging;
     public float chargeStartTime, pourcent;
     public Rigidbody2D rb;
     public SpriteRenderer flecheSpriteRenderer;
+    public PlayerEnum playerNum = PlayerEnum.One;
     Vector2 direction;
 
     //Collect
@@ -146,5 +147,51 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Enemy")
+        {
+            //TODO: Drop items
+
+            //TODO: Lose powerups
+
+            //TODO: Lose points
+
+            Instantiate(deathParticles, transform.position, Quaternion.identity);
+
+            switch (playerNum)
+            {
+                case PlayerEnum.One:
+                    transform.position = GameManager.Instance.spawn1.transform.position;
+                    break;
+                case PlayerEnum.Two:
+                    transform.position = GameManager.Instance.spawn2.transform.position;
+                    break;
+                default:
+                    transform.position = Vector3.zero;
+                    Debug.Log("GIVE THIS PLAYER A NUMBER!!!");
+                    break;
+            }
+        }
+        else
+        {
+            switch (playerNum)
+            {
+                case PlayerEnum.One:
+                    Instantiate(collisionParticles1, collision.GetContact(0).point, Quaternion.identity);
+                    break;
+                case PlayerEnum.Two:
+                    Instantiate(collisionParticles2, collision.GetContact(0).point, Quaternion.identity);
+                    break;
+            }
+        }
+    }
+
+    public enum PlayerEnum
+    {
+        One,
+        Two,
     }
 }
