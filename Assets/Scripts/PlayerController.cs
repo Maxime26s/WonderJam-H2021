@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public PlayerEnum playerNum = PlayerEnum.One;
     public GameObject ball;
     public RuntimeAnimatorController ballController, playerController;
+    public Color color2;
     Vector2 direction;
 
     //Collect
@@ -31,21 +33,10 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        //fleche.SetActive(true);
-        //flecheSpriteRenderer = fleche.GetComponent<SpriteRenderer>();
         cc2d = GetComponent<CircleCollider2D>();
         flecheSpriteRenderer = fleche.GetComponent<SpriteRenderer>();
         ballAnimator = ball.GetComponent<Animator>();
         playerAnimator = GetComponent<Animator>();
-        //fleche.SetActive(false);
-        try
-        {
-            GameInfo.Instance.AddPlayer(gameObject);
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e.Message);
-        }
 
         IEnumerator WaitAndSetupPlayer2()
         {
@@ -54,10 +45,20 @@ public class PlayerController : MonoBehaviour
             {
                 ballAnimator.runtimeAnimatorController = ballController;
                 playerAnimator.runtimeAnimatorController = playerController;
+                GetComponentInChildren<Light2D>().color = color2;
             }
         }
 
         StartCoroutine(WaitAndSetupPlayer2());
+
+        try
+        {
+            GameInfo.Instance.AddPlayer(gameObject);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
     }
 
     private void Update()

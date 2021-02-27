@@ -148,9 +148,9 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.039782763, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.69388384, b: 0.6666666, a: 1}
   m_Intensity: 1
-  m_LightVolumeOpacity: 0
+  m_LightVolumeOpacity: 0.02
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
@@ -482,6 +482,7 @@ MonoBehaviour:
   ball: {fileID: 314201785}
   ballController: {fileID: 9100000, guid: 33049e4cfb7b8b24cbe19ad12bf7227c, type: 2}
   playerController: {fileID: 9100000, guid: fe2d2d7972a5ee943bf68258076b9515, type: 2}
+  color2: {r: 0.6666667, g: 0.69411767, b: 1, a: 1}
 --- !u!95 &369421604
 Animator:
   serializedVersion: 3
