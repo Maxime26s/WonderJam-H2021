@@ -5,25 +5,12 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public float rayon, tempsMaxCharge, force, forceMultiplier, offsetFleche, flecheMinScale, flecheMaxScale;
-    public GameObject fleche;
+    public GameObject fleche, collisionParticles, deathParticles;
     public bool isCharging;
     public float chargeStartTime, pourcent;
     public Rigidbody2D rb;
+    public PlayerEnum playerNum = PlayerEnum.One;
     SpriteRenderer flecheSpriteRenderer;
-
-    public KeyCode up;
-    public KeyCode down;
-    public KeyCode left;
-    public KeyCode right;
-    public KeyCode move;
-    public KeyCode usePU;
-
-    public KeyCode upController;
-    public KeyCode downController;
-    public KeyCode leftController;
-    public KeyCode rightController;
-    public KeyCode moveController;
-    public KeyCode usePUController;
 
     // Start is called before the first frame update
     void Start()
@@ -68,4 +55,40 @@ public class Movement : MonoBehaviour
             fleche.transform.localScale = new Vector3(flecheMinScale, fleche.transform.localScale.y, fleche.transform.localScale.z);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Enemy")
+        {
+            //TODO: Drop items
+
+            //TODO: Lose powerups
+
+            //TODO: Lose points
+
+            Instantiate(deathParticles, transform.position, Quaternion.identity);
+
+            switch (playerNum)
+            {
+                case PlayerEnum.One:
+                    transform.position = GameManager.Instance.spawn1.transform.position;
+                    break;
+                case PlayerEnum.Two:
+                    transform.position = GameManager.Instance.spawn2.transform.position;
+                    break;
+                default:
+                    transform.position = Vector3.zero;
+                    Debug.Log("GIVE THIS PLAYER A NUMBER!!!");
+                    break;
+            }
+        }
+        else
+            Instantiate(collisionParticles, collision.GetContact(0).point, Quaternion.identity);
+    }
+}
+
+public enum PlayerEnum
+{
+    One,
+    Two,
 }
