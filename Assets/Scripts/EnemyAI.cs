@@ -21,7 +21,7 @@ public class EnemyAI : MonoBehaviour
     Seeker seeker;
     Rigidbody2D rb;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
@@ -70,9 +70,6 @@ public class EnemyAI : MonoBehaviour
         if (rb.velocity.magnitude > 100)
             rb.velocity = rb.velocity.normalized * 100;
 
-        //fieldOfView.SetDirection(rb.velocity);
-        //fieldOfView.SetOrigin(transform.position);
-
         transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(rb.velocity.y, rb.velocity.x));
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
@@ -82,7 +79,7 @@ public class EnemyAI : MonoBehaviour
             currentWaypoint++;
         }
 
-        if (!chasing && Vector3.Distance(route[routeIndex].position, transform.position) < distanceminmaxthing)
+        if ((!chasing && !GameManager.Instance.isSuperAlert) && Vector3.Distance(route[routeIndex].position, transform.position) < distanceminmaxthing)
         {
             routeIndex = routeIndex + 1 < route.Count ? routeIndex + 1 : 0;
             target = route[routeIndex];
