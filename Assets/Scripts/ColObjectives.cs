@@ -17,7 +17,7 @@ public class ColObjectives : MonoBehaviour
                 holdingObjective = true;
                 objective = collision.gameObject;
                 objective.SetActive(false);
-                
+
                 //Ajouter au UI
             }
         }
@@ -32,7 +32,7 @@ public class ColObjectives : MonoBehaviour
                 Destroy(objective);
                 objective = null;
             }
-            
+
         }
     }
 }

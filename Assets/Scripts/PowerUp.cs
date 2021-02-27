@@ -13,7 +13,7 @@ public class PowerUp : MonoBehaviour
     {
         if (!used)
         {
-            transform.Rotate(new Vector3(0,0,15) * Time.deltaTime);
+            transform.Rotate(new Vector3(0, 0, 15) * Time.deltaTime);
             transform.localScale += Vector3.one * zoomSpeed * Time.deltaTime;
             if (transform.localScale.x >= 1.5f || transform.localScale.x <= 0.66f)
                 zoomSpeed = zoomSpeed * -1;

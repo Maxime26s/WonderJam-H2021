@@ -50,7 +50,7 @@ public class Timer : MonoBehaviour
         {
             if (seconds < secRed)
                 timer.color = new Color32(255, 54, 74, 255);
-            else if(seconds < secYellow)
+            else if (seconds < secYellow)
                 timer.color = new Color32(240, 139, 31, 255);
             timer.text = string.Format("{0:#0}:{1:00}", seconds, (int)miliseconds);
         }

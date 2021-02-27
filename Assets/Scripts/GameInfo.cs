@@ -26,7 +26,7 @@ public class GameInfo : MonoBehaviour
     public CinemachineVirtualCamera vcam1, vcam2;
     public Camera cam1, cam2;
     public Camera overlaycam;
-    
+
     public void AddPlayer(GameObject player)
     {
         players.Add(player);
