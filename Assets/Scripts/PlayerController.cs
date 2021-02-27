@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("PowerUp"))
+        if (collision.gameObject.CompareTag("PowerUp") && !holding)
         {
             holding = true;
             objectHolding = collision.gameObject;
@@ -184,6 +184,8 @@ public class PlayerController : MonoBehaviour
                 {
                     case "box":
                         objectHolding.GetComponent<Box>().player = gameObject;
+                        break;
+                    case "firework":
                         break;
                 }
             }
