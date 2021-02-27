@@ -86,9 +86,3 @@ public class Movement : MonoBehaviour
             Instantiate(collisionParticles, collision.GetContact(0).point, Quaternion.identity);
     }
 }
-
-public enum PlayerEnum
-{
-    One,
-    Two,
-}
