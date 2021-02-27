@@ -336,7 +336,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a94f0a38411fd924784328b8941c11d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  money: 0
   textMoney: {fileID: 561692913}
 --- !u!1 &806291496
 GameObject:
@@ -485,7 +484,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a94f0a38411fd924784328b8941c11d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  money: 0
   textMoney: {fileID: 806291498}
 --- !u!1 &852015553
 GameObject:
@@ -1057,7 +1055,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff775c841325b204ca92225bf15770b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newImage: {fileID: 0}
 --- !u!1 &1705484514
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,7 +1364,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff775c841325b204ca92225bf15770b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newImage: {fileID: 0}
 --- !u!1 &1835559872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,7 +1527,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff775c841325b204ca92225bf15770b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newImage: {fileID: 0}
 --- !u!1 &2069286103
 GameObject:
   m_ObjectHideFlags: 0
@@ -1620,4 +1615,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff775c841325b204ca92225bf15770b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newImage: {fileID: 0}
