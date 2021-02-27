@@ -6,6 +6,7 @@ public class LobbyScript : MonoBehaviour
 {
     public GameObject texteP1, texteP2, p1guy, p2guy;
     public LevelLoader loader;
+    public GameInfo gameInfo;
 
     public void Login(int count)
     {
@@ -27,6 +28,7 @@ public class LobbyScript : MonoBehaviour
 
     public void StartGame()
     {
+        gameInfo.CheckCams();
         loader.LoadNextLevelAdditive(3);
     }
 }

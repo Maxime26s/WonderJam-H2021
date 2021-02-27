@@ -208,10 +208,10 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+}
 
-    public enum PlayerEnum
-    {
-        One,
-        Two,
-    }
+public enum PlayerEnum
+{
+    One,
+    Two,
 }
