@@ -74,5 +74,8 @@ public class GameManager : MonoBehaviour
             Debug.Log(e.Message);
         }
 
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        players[0].transform.position = spawn1.transform.position;
+        players[1].transform.position = spawn2.transform.position;
     }
 }
