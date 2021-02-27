@@ -1,18 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static GameManager Instance { get; private set; }
+    private void Awake()
     {
-        
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    List<GameObject> players = new List<GameObject>();
+    public List<GameObject> enemies = new List<GameObject>();
+    public bool isSuperAlert = false;
+
+    public void SuperAlert(Transform transform)
     {
-        
+        IEnumerator SuperDuperAlertTimer()
+        {
+            isSuperAlert = true;
+            foreach (GameObject enemy in enemies)
+            {
+                enemy.GetComponent<EnemyAI>().target = transform;
+            }
+            yield return new WaitForSeconds(8f);
+            isSuperAlert = false;
+            foreach (GameObject enemy in enemies)
+            {
+                enemy.GetComponent<EnemyAI>().target = enemy.GetComponent<EnemyAI>().route[enemy.GetComponent<EnemyAI>().routeIndex];
+            }
+        }
+        StartCoroutine(SuperDuperAlertTimer());
     }
+
 }
