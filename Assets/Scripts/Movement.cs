@@ -5,25 +5,11 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public float rayon, tempsMaxCharge, force, forceMultiplier, offsetFleche, flecheMinScale, flecheMaxScale;
-    public GameObject fleche;
+    public GameObject fleche, collisionParticles;
     public bool isCharging;
     public float chargeStartTime, pourcent;
     public Rigidbody2D rb;
     SpriteRenderer flecheSpriteRenderer;
-
-    public KeyCode up;
-    public KeyCode down;
-    public KeyCode left;
-    public KeyCode right;
-    public KeyCode move;
-    public KeyCode usePU;
-
-    public KeyCode upController;
-    public KeyCode downController;
-    public KeyCode leftController;
-    public KeyCode rightController;
-    public KeyCode moveController;
-    public KeyCode usePUController;
 
     // Start is called before the first frame update
     void Start()
@@ -67,5 +53,10 @@ public class Movement : MonoBehaviour
             pourcent = 0;
             fleche.transform.localScale = new Vector3(flecheMinScale, fleche.transform.localScale.y, fleche.transform.localScale.z);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Instantiate(collisionParticles, collision.GetContact(0).point, Quaternion.identity);
     }
 }
