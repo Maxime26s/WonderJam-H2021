@@ -465,7 +465,7 @@ MonoBehaviour:
   tempsMaxCharge: 1
   force: 1000
   forceMultiplier: 1
-  offsetFleche: 0
+  offsetFleche: 90
   flecheMinScale: 0.3
   flecheMaxScale: 1
   fleche: {fileID: 2779019130202987030}
@@ -473,11 +473,12 @@ MonoBehaviour:
   collisionParticles2: {fileID: 7328194476159081241, guid: b27f4b036c9a5264d947696994f7598a, type: 3}
   deathParticles: {fileID: 7772992199544801446, guid: 9430a0d2456db5e4089241c15858a26e, type: 3}
   isCharging: 0
-  chargeStartTime: 5.7941246
+  chargeStartTime: 62
   pourcent: 0
   rb: {fileID: 2779019129606050035}
   flecheSpriteRenderer: {fileID: 2779019130202987033}
   playerNum: 0
+  ball: {fileID: 314201785}
 --- !u!95 &369421604
 Animator:
   serializedVersion: 3
@@ -521,13 +522,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2779019130202987030}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.22, z: 0.66}
+  m_LocalScale: {x: 0.3, y: 1, z: 0.66}
   m_Children: []
   m_Father: {fileID: 2779019129606050033}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &2779019130202987033
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -568,7 +569,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 4e54343afedc9f14392061adac725f06, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f313bfea6e0b6c340802c211a4dd7615, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
