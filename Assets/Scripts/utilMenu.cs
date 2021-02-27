@@ -24,5 +24,5 @@ public class utilMenu : MonoBehaviour
         GameObject go = gameObject;
         go.SetActive(true);
     }
-    
+
 }
