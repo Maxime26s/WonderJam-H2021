@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class VisionEnemy : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class VisionEnemy : MonoBehaviour
     public LayerMask layerMask;
     public Rigidbody2D rb;
     public float lastHitTime;
+    public Color colorIdle, colorFound;
+    public Light2D lightVision;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +38,7 @@ public class VisionEnemy : MonoBehaviour
         {
             ai.target = ai.route[0];
             ai.chasing = false;
+            lightVision.color = colorIdle;
         }
     }
     void Chase(RaycastHit2D hit)
@@ -42,5 +46,6 @@ public class VisionEnemy : MonoBehaviour
         ai.chasing = true;
         lastHitTime = Time.time;
         ai.target = hit.collider.transform;
+        lightVision.color = colorFound;
     }
 }
