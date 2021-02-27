@@ -29,6 +29,6 @@ public class Box : MonoBehaviour
         rb2d.mass = 10;
         rb2d.constraints  = RigidbodyConstraints2D.FreezeRotation;
         */
-        rb2d.AddForce(force);
+        rb2d.AddForce(force*5);
     }
 }
