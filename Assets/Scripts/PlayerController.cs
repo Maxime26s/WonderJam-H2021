@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer flecheSpriteRenderer;
     public PlayerEnum playerNum = PlayerEnum.One;
     public GameObject ball;
+    public RuntimeAnimatorController ballController, playerController;
     Vector2 direction;
 
     //Collect
@@ -35,7 +36,7 @@ public class PlayerController : MonoBehaviour
         cc2d = GetComponent<CircleCollider2D>();
         flecheSpriteRenderer = fleche.GetComponent<SpriteRenderer>();
         ballAnimator = ball.GetComponent<Animator>();
-        playerAnimator = gameObject.GetComponent<Animator>();
+        playerAnimator = GetComponent<Animator>();
         //fleche.SetActive(false);
         try
         {
@@ -44,6 +45,16 @@ public class PlayerController : MonoBehaviour
         catch (Exception e)
         {
             Debug.Log(e.Message);
+        }
+
+        IEnumerator WaitAndSetupPlayer2()
+        {
+            yield return new WaitForSeconds(0.1f);
+            if(playerNum == PlayerEnum.Two)
+            {
+                ballAnimator.runtimeAnimatorController = ballController;
+                playerAnimator.runtimeAnimatorController = playerController;
+            }
         }
     }
 
