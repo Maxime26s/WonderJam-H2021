@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,8 +19,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    List<GameObject> players = new List<GameObject>();
+    public LevelLoader loader;
+    public GameObject spawn1, spawn2;
     public List<GameObject> enemies = new List<GameObject>();
+    public List<GameObject> loot = new List<GameObject>();
+    public int collected;
     public bool isSuperAlert = false;
     public GameObject policeEffect;
 
@@ -44,4 +48,14 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SuperDuperAlertTimer());
     }
 
+    private void Update()
+    {
+        if (collected >= loot.Count)
+            GoNext();
+    }
+
+    public void GoNext()
+    {
+        loader.LoadNextLevelAdditive(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 }

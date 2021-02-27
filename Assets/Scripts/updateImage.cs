@@ -29,6 +29,6 @@ public class updateImage : MonoBehaviour
 
                 image.image = newImage;*/
     }
-    
-    
+
+
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class VisionEnemy : MonoBehaviour
 {
@@ -10,11 +11,13 @@ public class VisionEnemy : MonoBehaviour
     public LayerMask layerMask;
     public Rigidbody2D rb;
     public float lastHitTime;
+    public Color colorIdle, colorFound;
+    public Light2D lightVision;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -23,18 +26,19 @@ public class VisionEnemy : MonoBehaviour
         Vector3 direction = rb.velocity;
         float startAngle = (Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x) - fov / 2) * Mathf.Deg2Rad;
         int nbRay = (int)Mathf.Ceil(fov);
-        for(int i = 0; i < nbRay; i++)
+        for (int i = 0; i < nbRay; i++)
         {
             float angle = startAngle + i * fov * Mathf.Deg2Rad / nbRay;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), range, layerMask);
-            Debug.DrawRay(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle))*range, Color.green);
+            Debug.DrawRay(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * range, Color.green);
             if (hit.collider != null && hit.collider.tag == "Player")
                 Chase(hit);
         }
-        if(ai.chasing && Time.time - lastHitTime > 3f)
+        if (ai.chasing && Time.time - lastHitTime > 3f)
         {
             ai.target = ai.route[0];
             ai.chasing = false;
+            lightVision.color = colorIdle;
         }
     }
     void Chase(RaycastHit2D hit)
@@ -42,5 +46,6 @@ public class VisionEnemy : MonoBehaviour
         ai.chasing = true;
         lastHitTime = Time.time;
         ai.target = hit.collider.transform;
+        lightVision.color = colorFound;
     }
 }

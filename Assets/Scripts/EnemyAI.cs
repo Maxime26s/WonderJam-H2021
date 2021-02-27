@@ -16,7 +16,7 @@ public class EnemyAI : MonoBehaviour
 
     Path path;
     int currentWaypoint = 0;
-    bool reachedEndOfPath = false;
+    //bool reachedEndOfPath = false;
 
     Seeker seeker;
     Rigidbody2D rb;
@@ -55,20 +55,20 @@ public class EnemyAI : MonoBehaviour
 
         if (currentWaypoint >= path.vectorPath.Count)
         {
-            reachedEndOfPath = true;
+            //reachedEndOfPath = true;
             return;
         }
         else
         {
-            reachedEndOfPath = false;
+            //reachedEndOfPath = false;
         }
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
 
         rb.AddForce(force);
-        if (rb.velocity.magnitude > 100)
-            rb.velocity = rb.velocity.normalized * 100;
+        if (rb.velocity.magnitude > maxSpeed)
+            rb.velocity = chasing ? rb.velocity.normalized * maxSpeed : rb.velocity.normalized * maxSpeed / 2f;
 
         transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(rb.velocity.y, rb.velocity.x));
 

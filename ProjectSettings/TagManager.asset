@@ -7,17 +7,18 @@ TagManager:
   - PowerUp
   - Zone
   - Objectif
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Obstacle
   - background
-  - 
-  - 
+  - P1 Cam
+  - P2 Cam
   - 
   - 
   - 
