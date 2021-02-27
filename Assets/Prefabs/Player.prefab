@@ -190,10 +190,12 @@ MonoBehaviour:
   flecheMaxScale: 3
   fleche: {fileID: 202428432185527196}
   collisionParticles: {fileID: 7328194476159081241, guid: 072ba9d5dc0467548abbb6e891874b21, type: 3}
+  deathParticles: {fileID: 7772992199544801446, guid: 9430a0d2456db5e4089241c15858a26e, type: 3}
   isCharging: 0
   chargeStartTime: 0
   pourcent: 0
   rb: {fileID: 202428432761946489}
+  playerNum: 0
 --- !u!50 &202428432761946489
 Rigidbody2D:
   serializedVersion: 4

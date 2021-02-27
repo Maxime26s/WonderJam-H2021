@@ -5,7 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     public float rayon, tempsMaxCharge, force, forceMultiplier, offsetFleche, flecheMinScale, flecheMaxScale;
-    public GameObject fleche, collisionParticles;
+    public GameObject fleche, collisionParticles, deathParticles;
     public bool isCharging;
     public float chargeStartTime, pourcent;
     public Rigidbody2D rb;
@@ -66,6 +66,8 @@ public class Movement : MonoBehaviour
 
             //TODO: Lose points
 
+            Instantiate(deathParticles, transform.position, Quaternion.identity);
+
             switch (playerNum)
             {
                 case PlayerEnum.One:
@@ -79,8 +81,6 @@ public class Movement : MonoBehaviour
                     Debug.Log("GIVE THIS PLAYER A NUMBER!!!");
                     break;
             }
-
-            //TODO: Death Particules
         }
         else
             Instantiate(collisionParticles, collision.GetContact(0).point, Quaternion.identity);
