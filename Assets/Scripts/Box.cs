@@ -19,7 +19,8 @@ public class Box : MonoBehaviour
     public void Use(Vector2 force, GameObject fleche)
     {
         gameObject.SetActive(true);
-        gameObject.transform.position = fleche.transform.position;
+        transform.position = fleche.transform.position;
+        transform.rotation = fleche.transform.rotation;
         bc2d.isTrigger = false;
         rb2d.isKinematic = false;
         /*

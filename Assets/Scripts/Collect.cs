@@ -47,7 +47,8 @@ public class Collect : MonoBehaviour
                 switch (objType)
                 {
                     case "box":
-                        objectHolding.GetComponent<Box>().Use(direction * pourcent * force * forceMultiplier, fleche); 
+                        objectHolding.GetComponent<Box>().Use(direction * pourcent * force * forceMultiplier, fleche);
+                        objectHolding.GetComponent<PowerUp>().SetUsed();
                         break;
                 }
                 flecheSpriteRenderer.color = Color.white;
