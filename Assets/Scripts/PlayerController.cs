@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public RuntimeAnimatorController ballController, playerController;
     public Color color2;
     public float invincibleRespawnTime = 2f;
+    public ColObjectives colObjectives;
     Vector2 direction;
 
     //Collect
@@ -217,9 +218,10 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.collider.tag == "Enemy" && !invincible)
         {
-            //TODO: Drop items
+            colObjectives.objective.transform.position = transform.position;
 
-            //TODO: Lose powerups
+            objectHolding = null;
+            holding = false;
 
             Instantiate(deathParticles, transform.position, Quaternion.identity);
 
@@ -245,6 +247,9 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("GIVE THIS PLAYER A NUMBER!!!");
                     break;
             }
+
+            colObjectives.objective.SetActive(true);
+            colObjectives.holdingObjective = false;
         }
         else
         {

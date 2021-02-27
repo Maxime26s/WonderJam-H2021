@@ -483,6 +483,8 @@ MonoBehaviour:
   ballController: {fileID: 9100000, guid: 33049e4cfb7b8b24cbe19ad12bf7227c, type: 2}
   playerController: {fileID: 9100000, guid: fe2d2d7972a5ee943bf68258076b9515, type: 2}
   color2: {r: 0.6666667, g: 0.69411767, b: 1, a: 1}
+  invincibleRespawnTime: 2
+  colObjectives: {fileID: 2620572418335838614}
 --- !u!95 &369421604
 Animator:
   serializedVersion: 3
