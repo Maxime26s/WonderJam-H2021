@@ -133,6 +133,23 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7152679563063746748, guid: 3e406902143d094419a719288e14e9cc, type: 3}
   m_PrefabInstance: {fileID: 4097967542092696107}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &775911702 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4633285977443904046, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
+  m_PrefabInstance: {fileID: 784129748}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &775911703
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775911702}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &784129748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -140,106 +157,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4633285976323418709, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285976323418710, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285976323418710, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285976323418710, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285976323418710, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285976708558449, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285976708558449, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285976708558449, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285976708558449, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285976708558460, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977059219140, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977059219141, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977059219141, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977059219141, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977059219141, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977061825748, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977061825748, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977061825748, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977061825748, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977061825771, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977131780433, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977131780434, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977131780434, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977131780434, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977131780434, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4633285977530509008, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -275,18 +192,6 @@ PrefabInstance:
     - target: {fileID: 4633285977530509008, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
       propertyPath: m_SizeDelta.y
       value: 2160
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977530509008, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.0046296297
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977530509008, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.0046296297
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977530509008, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.0046296297
       objectReference: {fileID: 0}
     - target: {fileID: 4633285977530509008, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -340,38 +245,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemShowcase
       objectReference: {fileID: 0}
-    - target: {fileID: 4633285977530509014, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4633285977530509015, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1389374344}
-    - target: {fileID: 4633285977530509015, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: m_RenderMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977885513208, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977885513209, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977885513209, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977885513209, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4633285977885513209, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af46cdd4e090c6c489ae84c28d6857c8, type: 3}
 --- !u!1001 &784950452
