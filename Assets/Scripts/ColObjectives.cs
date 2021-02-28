@@ -31,6 +31,7 @@ public class ColObjectives : MonoBehaviour
                 //Enlever du UI                Debug.Log(cash);
                 Destroy(objective);
                 objective = null;
+                GameManager.Instance.collected++;
             }
 
         }

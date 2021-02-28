@@ -25,7 +25,7 @@ public class GameInfo : MonoBehaviour
     public bool started = false;
     public CinemachineVirtualCamera vcam1, vcam2;
     public Camera cam1, cam2;
-    public Camera overlaycam;
+    public GameObject overlaycam;
 
     public void AddPlayer(GameObject player)
     {
@@ -54,7 +54,6 @@ public class GameInfo : MonoBehaviour
         lobbyScript = GameObject.Find("LobbyScript").GetComponent<LobbyScript>();
         lobbyScript.gameInfo = this;
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("PlayerInfo"));
-        Debug.Log("Ready2");
     }
 
     public void CheckCams()
