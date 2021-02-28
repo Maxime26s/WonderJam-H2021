@@ -30,5 +30,8 @@ public class LobbyScript : MonoBehaviour
     {
         gameInfo.CheckCams();
         loader.LoadNextLevelAdditive(3);
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        players[0].GetComponent<PlayerController>().gameStarted = true;
+        players[1].GetComponent<PlayerController>().gameStarted = true;
     }
 }

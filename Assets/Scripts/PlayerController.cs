@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public bool invisi;
 
     public GameInfo gameInfo;
+    public bool gameStarted = false;
 
     //Collect
     private CircleCollider2D cc2d;
@@ -75,6 +76,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (gameStarted && GameManager.Instance != null)
+        {
+            GameManager.Instance.UpdateUI(gameObject);
+        }
         if (isCharging)
         {
             pourcent = (Time.time - chargeStartTime) / tempsMaxCharge;
@@ -160,7 +165,7 @@ public class PlayerController : MonoBehaviour
                 gameInfo.started = true;
                 gameInfo.lobbyScript.StartGame();
             }
-            else if (SceneManager.GetActiveScene().name == "Prologue" && !gameInfo.prologue || SceneManager.GetActiveScene().name == "Epilogue" && !gameInfo.epilogue)
+            else if (gameInfo != null && (SceneManager.GetActiveScene().name == "Prologue" && !gameInfo.prologue || SceneManager.GetActiveScene().name == "Epilogue" && !gameInfo.epilogue))
             {
                 if (!gameInfo.prologue)
                 {
@@ -282,10 +287,17 @@ public class PlayerController : MonoBehaviour
 
         toRespawn.SetActive(false);
         yield return new WaitForSeconds(to);
-        toRespawn.SetActive(true);
-        toRespawn.GetComponent<PowerUp>().used = false;
-        toRespawn.transform.position = toRespawn.GetComponent<PowerUp>().startingPos;
-        toRespawn.transform.localScale = toRespawn.GetComponent<PowerUp>().startingSize;
+        try
+        {
+            toRespawn.SetActive(true);
+            toRespawn.GetComponent<PowerUp>().used = false;
+            toRespawn.transform.position = toRespawn.GetComponent<PowerUp>().startingPos;
+            toRespawn.transform.localScale = toRespawn.GetComponent<PowerUp>().startingSize;
+        }catch(Exception e)
+        {
+            Debug.Log(e);
+        }
+        
 
     }
 

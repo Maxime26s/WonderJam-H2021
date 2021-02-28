@@ -26,9 +26,8 @@ public class GameManager : MonoBehaviour
     public GameObject spawn1, spawn2;
     public List<GameObject> enemies = new List<GameObject>();
     public List<GameObject> loot = new List<GameObject>();
-    public int collected;
-    public bool isSuperAlert = false;
-    public GameObject policeEffect1, policeEffect2;
+
+
     public int world = 1, level = -1;
     public string levelName = "";
     public TextMeshProUGUI title;
@@ -37,6 +36,11 @@ public class GameManager : MonoBehaviour
     public GameObject[] players;
     public GameObject timer;
     public GameObject ui;
+
+    [Header("Variables")]
+    public int collected;
+    public bool isSuperAlert = false;
+    public GameObject policeEffect1, policeEffect2;
 
     [Header("UI")]
     public TextMeshProUGUI textP1;
@@ -56,6 +60,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> itemsP1, itemsP2;
     public TextMeshProUGUI scorep1, scorep2, winner;
     public GameObject cameraShowcase, cameraSummary;
+
     public CompositeCollider2D confiner;
     GameObject barreNoire;
 
@@ -97,7 +102,13 @@ public class GameManager : MonoBehaviour
 
     public void GoNext()
     {
-        loader.LoadNextLevelAdditive(SceneManager.GetActiveScene().buildIndex + 1);
+        loader.LoadNextIndexAdditive();
+        foreach (GameObject e in enemies)
+            Destroy(e);
+        Destroy(GameObject.FindGameObjectWithTag("Astar"));
+        policeEffect1.SetActive(false);
+        policeEffect2.SetActive(false);
+        Destroy(gameObject);
     }
 
     public void Next()
@@ -136,7 +147,17 @@ public class GameManager : MonoBehaviour
         gameState = State.Summary;
         timer.GetComponent<Timer>().running = false;
         foreach (GameObject player in players)
+        {
             player.GetComponent<PlayerController>().isFrozen = true;
+            player.GetComponent<PlayerController>().objectHolding = null;
+            player.GetComponent<PlayerController>().holding = false;
+            player.GetComponent<PlayerController>().invisi = false;
+            player.GetComponent<ColObjectives>().holdingObjective = false;
+            player.GetComponent<ColObjectives>().objective = null;
+            player.GetComponent<PlayerController>().isCharging = false;
+            player.GetComponent<PlayerController>().pourcent = 0;
+        }
+            
 
         scorep1.text = players[0].GetComponent<ColObjectives>().cash.ToString() + " $";
         scorep2.text = players[1].GetComponent<ColObjectives>().cash.ToString() + " $";
@@ -198,7 +219,7 @@ public class GameManager : MonoBehaviour
     {
         try
         {
-            policeEffect1 = GameObject.Find("P2").transform.GetChild(0).gameObject;
+            policeEffect1 = GameObject.Find("P1").transform.GetChild(0).gameObject;
             policeEffect2 = GameObject.Find("P2").transform.GetChild(0).gameObject;
         }
         catch (Exception e)
@@ -227,6 +248,16 @@ public class GameManager : MonoBehaviour
             else
                 panels[i].SetActive(false);
         }
+
+        //GameObject.FindGameObjectWithTag("Astar").GetComponent<AstarPath>().Scan();
+        IEnumerator DoIt()
+        {
+            yield return new WaitForSeconds(1f);
+            AstarPath.FindAstarPath();
+            AstarPath.active.Scan();
+        }
+        StartCoroutine(DoIt());
+
     }
 
     public void UpdateUI(GameObject player)
