@@ -22,7 +22,7 @@ public class GameInfo : MonoBehaviour
 
     public List<GameObject> players = new List<GameObject>();
     public LobbyScript lobbyScript;
-    public bool started = false;
+    public bool started = false, prologue = false, epilogue = false;
     public CinemachineVirtualCamera vcam1, vcam2;
     public Camera cam1, cam2;
     public GameObject barreNoire;

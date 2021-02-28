@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class PlayerController : MonoBehaviour
     public float invisibleTime;
     public bool invisi;
 
+    public GameInfo gameInfo;
+
     //Collect
     private CircleCollider2D cc2d;
     public bool holding = false;
@@ -45,6 +48,8 @@ public class PlayerController : MonoBehaviour
         ballAnimator = ball.GetComponent<Animator>();
         playerAnimator = GetComponent<Animator>();
 
+        gameInfo = GameObject.Find("GameInfo").GetComponent<GameInfo>();
+
         IEnumerator WaitAndSetupPlayer2()
         {
             yield return new WaitForSeconds(0.1f);
@@ -60,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
         try
         {
-            GameInfo.Instance.AddPlayer(gameObject);
+            gameInfo.AddPlayer(gameObject);
         }
         catch (Exception e)
         {
@@ -138,19 +143,6 @@ public class PlayerController : MonoBehaviour
     {
         if (!isFrozen)
         {
-            try
-            {
-                if (!GameInfo.Instance.started)
-                {
-                    GameInfo.Instance.started = true;
-                    GameInfo.Instance.lobbyScript.StartGame();
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.Log(e.Message);
-            }
-
             if (!isCharging && ctx.performed)
             {
                 if (holding && objectHolding.GetComponent<PowerUp>().throwable)
@@ -163,12 +155,26 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (!GameInfo.Instance.started && GameInfo.Instance.players.Count == 2)
+            if (gameInfo != null && gameInfo.players.Count == 2 && !gameInfo.started)
             {
-                GameInfo.Instance.started = true;
-                GameInfo.Instance.lobbyScript.StartGame();
+                gameInfo.started = true;
+                gameInfo.lobbyScript.StartGame();
             }
-            else if(GameManager.Instance != null)
+            else if (SceneManager.GetActiveScene().name == "Prologue" && !gameInfo.prologue || SceneManager.GetActiveScene().name == "Epilogue" && !gameInfo.epilogue)
+            {
+                if (!gameInfo.prologue)
+                {
+                    gameInfo.prologue = true;
+                    GameObject.Find("LevelLoader").GetComponent<LevelLoader>().LoadNextIndexAdditive();
+                }
+                else if (!gameInfo.epilogue)
+                {
+                    gameInfo.epilogue = true;
+                    GameObject.Find("LevelLoader").GetComponent<LevelLoader>().LoadMenu();
+                }
+            }
+
+            else if (GameManager.Instance != null)
                 GameManager.Instance.Next();
         }
 
@@ -256,7 +262,7 @@ public class PlayerController : MonoBehaviour
                         gameObject.GetComponent<SpriteRenderer>().color = temp;
                         temp = ball.GetComponent<SpriteRenderer>().color;
                         temp.a = 0.2f;
-                        ball.GetComponent<SpriteRenderer>().color=temp;
+                        ball.GetComponent<SpriteRenderer>().color = temp;
                         StartCoroutine(invisible());
                         break;
 
@@ -273,7 +279,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator Respawn(GameObject toRespawn)
     {
         float to = toRespawn.GetComponent<PowerUp>().timeout;
-        
+
         toRespawn.SetActive(false);
         yield return new WaitForSeconds(to);
         toRespawn.SetActive(true);

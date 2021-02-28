@@ -21,10 +21,13 @@ public class Intro : MonoBehaviour
     public float skyMoveSpeed;
     public float textMoveSpeed;
 
+    public LevelLoader loader;
+
     private Vector3 initialStreet;
     private Vector3 initialBuilding;
     private Vector3 initialSky;
     private bool moving;
+    private bool over = false, done = false;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +53,12 @@ public class Intro : MonoBehaviour
     void Update()
     {
         player.GetComponent<Animator>().SetBool("Running", true);
+
+        if (over && !done)
+        {
+            done = true;
+            loader.LoadNextIndexAdditive();
+        }
     }
 
     public IEnumerator MoveStreet()
@@ -190,5 +199,6 @@ public class Intro : MonoBehaviour
             black.GetComponent<SpriteRenderer>().color = c;
             yield return null;
         }
+        over = true;
     }
 }

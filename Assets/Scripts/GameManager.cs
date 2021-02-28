@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour
             }
             for (int i = 0; i < collectedP2.Count; i++)
             {
-                StartCoroutine(ShowItem(0.33f, i, PlayerEnum.One));
+                StartCoroutine(ShowItem(0.33f, i, PlayerEnum.Two));
             }
         }
 
