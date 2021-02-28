@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
     public Color color2;
     Vector2 direction;
 
+    public float invisibleTime;
+    public bool invisi;
+
     //Collect
     private CircleCollider2D cc2d;
     private bool holding = false;
@@ -206,11 +209,26 @@ public class PlayerController : MonoBehaviour
                     case "box":
                         objectHolding.GetComponent<Box>().player = gameObject;
                         break;
+                    case "invisible":
+                        Color temp = gameObject.GetComponent<SpriteRenderer>().color;
+                        temp.a = 0.2f;
+                        gameObject.GetComponent<SpriteRenderer>().color = temp;
+                        temp = ball.GetComponent<SpriteRenderer>().color;
+                        temp.a = 0.2f;
+                        ball.GetComponent<SpriteRenderer>().color=temp;
+                        StartCoroutine(invisible());
+                        break;
+
                 }
             }
         }
     }
-
+    IEnumerator invisible()
+    {
+        invisi = true;
+        yield return new WaitForSeconds(invisibleTime);
+        invisi = false;
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Enemy")
