@@ -163,7 +163,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (!GameInfo.Instance.started)
+            if (!GameInfo.Instance.started && GameInfo.Instance.players.Count == 2)
             {
                 GameInfo.Instance.started = true;
                 GameInfo.Instance.lobbyScript.StartGame();
