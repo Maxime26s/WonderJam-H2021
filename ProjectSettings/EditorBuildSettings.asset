@@ -30,6 +30,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Tryhard/Level4.unity
     guid: aa755cbac7ad5274c8e5bc77c837c525
   - enabled: 1
+    path: Assets/Scenes/Tryhard/Level 1-6.unity
+    guid: bdc55cc191e79b04c89aec4bab6f3d5b
+  - enabled: 1
     path: Assets/Scenes/Tryhard/Epilogue.unity
     guid: ac548abd81261244eb1e5cf0c17ea6e2
   m_configObjects: {}
