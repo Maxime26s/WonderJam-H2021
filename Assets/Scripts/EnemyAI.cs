@@ -58,6 +58,9 @@ public class EnemyAI : MonoBehaviour
         if (path == null)
             return;
 
+        if (currentWaypoint >= path.vectorPath.Count)
+            return;
+
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position);
 
         if (direction.magnitude > 0.5)

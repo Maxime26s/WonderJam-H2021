@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &29329982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,6 +234,7 @@ GameObject:
   - component: {fileID: 105994730}
   - component: {fileID: 105994732}
   - component: {fileID: 105994731}
+  - component: {fileID: 105994733}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -298,6 +299,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 105994729}
   m_CullTransparentMesh: 1
+--- !u!95 &105994733
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105994729}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2f688626f786a104c8b95f7d234de3d8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &199328762
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,6 +1054,10 @@ PrefabInstance:
       propertyPath: texteP2
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2776220483709100639, guid: b2001604cfc573442b3183296b471dc0, type: 3}
+      propertyPath: barreNoire
+      value: 
+      objectReference: {fileID: 29329981}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2001604cfc573442b3183296b471dc0, type: 3}
 --- !u!1 &1526667004

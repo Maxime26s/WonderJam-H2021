@@ -25,7 +25,7 @@ public class GameInfo : MonoBehaviour
     public bool started = false;
     public CinemachineVirtualCamera vcam1, vcam2;
     public Camera cam1, cam2;
-    public GameObject overlaycam;
+    public GameObject barreNoire;
 
     public void AddPlayer(GameObject player)
     {
