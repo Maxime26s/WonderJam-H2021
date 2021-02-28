@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour
 
     //Collect
     private CircleCollider2D cc2d;
-    private bool holding = false;
-    private GameObject objectHolding;
+    public bool holding = false;
+    public GameObject objectHolding;
     string objType;
     bool throwable;
     private Animator ballAnimator;
@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log(e.Message);
         }
+        GameManager.Instance.UpdateUI(gameObject);
     }
 
     private void Update()
@@ -102,6 +103,7 @@ public class PlayerController : MonoBehaviour
             isCharging = true;
             chargeStartTime = Time.time;
         }
+        GameManager.Instance.UpdateUI(gameObject);
     }
 
     public void Release(InputAction.CallbackContext ctx)
@@ -115,6 +117,7 @@ public class PlayerController : MonoBehaviour
             pourcent = 0;
             fleche.transform.localScale = new Vector3(flecheMinScale, fleche.transform.localScale.y, fleche.transform.localScale.z);
         }
+        GameManager.Instance.UpdateUI(gameObject);
     }
 
     public void Use(InputAction.CallbackContext ctx)
@@ -140,6 +143,7 @@ public class PlayerController : MonoBehaviour
                 chargeStartTime = Time.time;
             }
         }
+        GameManager.Instance.UpdateUI(gameObject);
     }
 
     public void UseRelease(InputAction.CallbackContext ctx)
@@ -171,6 +175,7 @@ public class PlayerController : MonoBehaviour
                 throwable = false;
             }
         }
+        GameManager.Instance.UpdateUI(gameObject);
     }
 
     public void Move(InputAction.CallbackContext ctx)
@@ -217,6 +222,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        GameManager.Instance.UpdateUI(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -257,6 +263,7 @@ public class PlayerController : MonoBehaviour
                     break;
             }
         }
+        GameManager.Instance.UpdateUI(gameObject);
     }
 }
 
