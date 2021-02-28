@@ -55,6 +55,12 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (path == null)
+            return;
+
+        if (currentWaypoint >= path.vectorPath.Count)
+            return;
+
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position);
 
         if (direction.magnitude > 0.5)
@@ -77,13 +83,11 @@ public class EnemyAI : MonoBehaviour
             if (light.transform.rotation.eulerAngles.z > 270 || light.transform.rotation.eulerAngles.z < 90)
             {
                 animator.SetBool("Behind", true);
-                //spriteRenderer.sortingLayerName = "Light";
                 shadow.SetActive(true);
             }
             else
             {
                 animator.SetBool("Behind", false);
-                //spriteRenderer.sortingLayerID = 0;
                 shadow.SetActive(false);
             }  
 

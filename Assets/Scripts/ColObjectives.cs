@@ -29,12 +29,21 @@ public class ColObjectives : MonoBehaviour
                 holdingObjective = false;
                 cash += objective.GetComponent<Objectif>().money;
                 //Enlever du UI                Debug.Log(cash);
+                GameManager.Instance.collected++;
+                switch (GetComponent<PlayerController>().playerNum)
+                {
+                    case PlayerEnum.One:
+                        GameManager.Instance.collectedP1.Add(objective.GetComponentInChildren<SpriteRenderer>().sprite);
+                        break;
+                    case PlayerEnum.Two:
+                        GameManager.Instance.collectedP2.Add(objective.GetComponentInChildren<SpriteRenderer>().sprite);
+                        break;
+                    default:
+                        break;
+                }
                 Destroy(objective);
                 objective = null;
-                GameManager.Instance.collected++;
             }
-
         }
-        GameManager.Instance.UpdateUI(gameObject);
     }
 }

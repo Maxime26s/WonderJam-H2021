@@ -69,7 +69,7 @@ MonoBehaviour:
   - {x: -0.25018454, y: 0.2584896, z: 0}
   m_ShapePathHash: 590589421
   m_Mesh: {fileID: 0}
-  m_InstanceId: -938124
+  m_InstanceId: 109876
 --- !u!1 &358711883099398476
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253ecb76a50184d45a9bbe0f83743c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  money: 25000
+  name: Punch Lord
+  money: 80000
 --- !u!1 &1523263807430027960
 GameObject:
   m_ObjectHideFlags: 0

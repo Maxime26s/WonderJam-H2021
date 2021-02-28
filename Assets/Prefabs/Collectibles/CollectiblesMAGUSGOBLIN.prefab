@@ -227,7 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253ecb76a50184d45a9bbe0f83743c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  money: 25000
+  name: Goblin man
+  money: 40000
 --- !u!1 &8028447857387090313
 GameObject:
   m_ObjectHideFlags: 0

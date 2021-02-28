@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,10 +23,13 @@ public class PlayerController : MonoBehaviour
     public Color color2;
     public float invincibleRespawnTime = 2f;
     public ColObjectives colObjectives;
-    Vector2 direction;
+    public bool isFrozen = true;
+    Vector2 direction, oldDirection;
 
     public float invisibleTime;
     public bool invisi;
+
+    public GameInfo gameInfo;
 
     //Collect
     private CircleCollider2D cc2d;
@@ -44,10 +48,12 @@ public class PlayerController : MonoBehaviour
         ballAnimator = ball.GetComponent<Animator>();
         playerAnimator = GetComponent<Animator>();
 
+        gameInfo = GameObject.Find("GameInfo").GetComponent<GameInfo>();
+
         IEnumerator WaitAndSetupPlayer2()
         {
             yield return new WaitForSeconds(0.1f);
-            if(playerNum == PlayerEnum.Two)
+            if (playerNum == PlayerEnum.Two)
             {
                 ballAnimator.runtimeAnimatorController = ballController;
                 playerAnimator.runtimeAnimatorController = playerController;
@@ -59,14 +65,12 @@ public class PlayerController : MonoBehaviour
 
         try
         {
-            GameInfo.Instance.AddPlayer(gameObject);
+            gameInfo.AddPlayer(gameObject);
         }
         catch (Exception e)
         {
             Debug.Log(e.Message);
         }
-        GameManager.Instance.UpdateUI(gameObject);
-        GameManager.Instance.Setup();
     }
 
     private void Update()
@@ -103,111 +107,136 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Shoot(InputAction.CallbackContext ctx)
+    public void Shoot(InputAction.CallbackContext ctx) //Press Space / A
     {
-        if (!isCharging && ctx.performed)
+        if (!isFrozen)
         {
-            isCharging = true;
-            chargeStartTime = Time.time;
-        }
-        GameManager.Instance.UpdateUI(gameObject);
-    }
-
-    public void Release(InputAction.CallbackContext ctx)
-    {
-        if (isCharging && ctx.performed)
-        {
-            isCharging = false;
-            rb.AddForce(direction * pourcent * force * forceMultiplier);
-
-            flecheSpriteRenderer.color = Color.white;
-            pourcent = 0;
-            fleche.transform.localScale = new Vector3(flecheMinScale, fleche.transform.localScale.y, fleche.transform.localScale.z);
-        }
-        GameManager.Instance.UpdateUI(gameObject);
-    }
-
-    public void Use(InputAction.CallbackContext ctx)
-    {
-        try
-        {
-            if (!GameInfo.Instance.started)
-            {
-                GameInfo.Instance.started = true;
-                GameInfo.Instance.lobbyScript.StartGame();
-            }
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e.Message);
-        }
-
-        if (!isCharging && ctx.performed)
-        {
-            if (holding && objectHolding.GetComponent<PowerUp>().throwable)
+            if (!isCharging && ctx.performed)
             {
                 isCharging = true;
                 chargeStartTime = Time.time;
             }
+            GameManager.Instance.UpdateUI(gameObject);
         }
-        GameManager.Instance.UpdateUI(gameObject);
+
     }
 
-    public void UseRelease(InputAction.CallbackContext ctx)
+    public void Release(InputAction.CallbackContext ctx) //Lache Space / A
     {
-        if (isCharging && ctx.performed)
+        if (!isFrozen)
         {
-            if (holding && objectHolding.GetComponent<PowerUp>().throwable)
+            if (isCharging && ctx.performed)
             {
                 isCharging = false;
-                switch (objType)
-                {
-                    case "box":
-                        objectHolding.GetComponent<Box>().Use(direction * 1 * force * forceMultiplier, fleche);
-                        objectHolding.GetComponent<PowerUp>().SetUsed();
-                        break;
-                    case "firework":
-                        objectHolding.GetComponent<Firework>().Use(direction * 1 * force * forceMultiplier, fleche);
-                        objectHolding.GetComponent<PowerUp>().SetUsed();
-                        break;
-                    default:
-                        break;
-                }
+                rb.AddForce(direction * pourcent * force * forceMultiplier);
+
                 flecheSpriteRenderer.color = Color.white;
                 pourcent = 0;
                 fleche.transform.localScale = new Vector3(flecheMinScale, fleche.transform.localScale.y, fleche.transform.localScale.z);
-                objectHolding = null;
-                objType = "";
-                holding = false;
-                throwable = false;
             }
+            GameManager.Instance.UpdateUI(gameObject);
         }
-        GameManager.Instance.UpdateUI(gameObject);
+
     }
 
-    public void Move(InputAction.CallbackContext ctx)
+    public void Use(InputAction.CallbackContext ctx) //Press E / X
     {
-        /*
-        float oldAngle = transform.rotation.z;
-        float newAngle = Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x) - offsetFleche;
-        Mathf.Lerp(oldAngle, newAngle, 0.1f);
-        */
-        direction = ctx.ReadValue<Vector2>();
-
-        if (direction.magnitude < 0.3)
-            fleche.SetActive(false);
+        if (!isFrozen)
+        {
+            if (!isCharging && ctx.performed)
+            {
+                if (holding && objectHolding.GetComponent<PowerUp>().throwable)
+                {
+                    isCharging = true;
+                    chargeStartTime = Time.time;
+                }
+            }
+            GameManager.Instance.UpdateUI(gameObject);
+        }
         else
         {
-            fleche.SetActive(true);
+            if (gameInfo != null && gameInfo.players.Count == 2 && !gameInfo.started)
+            {
+                gameInfo.started = true;
+                gameInfo.lobbyScript.StartGame();
+            }
+            else if (SceneManager.GetActiveScene().name == "Prologue" && !gameInfo.prologue || SceneManager.GetActiveScene().name == "Epilogue" && !gameInfo.epilogue)
+            {
+                if (!gameInfo.prologue)
+                {
+                    gameInfo.prologue = true;
+                    GameObject.Find("LevelLoader").GetComponent<LevelLoader>().LoadNextIndexAdditive();
+                }
+                else if (!gameInfo.epilogue)
+                {
+                    gameInfo.epilogue = true;
+                    GameObject.Find("LevelLoader").GetComponent<LevelLoader>().LoadMenu();
+                }
+            }
+
+            else if (GameManager.Instance != null)
+                GameManager.Instance.Next();
         }
 
-        direction = direction.normalized;
-
-        fleche.transform.localPosition = direction * rayon;
-        fleche.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x) - offsetFleche);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void UseRelease(InputAction.CallbackContext ctx) //Release E / X
+    {
+        if (!isFrozen)
+        {
+            if (isCharging && ctx.performed)
+            {
+                if (holding && objectHolding.GetComponent<PowerUp>().throwable)
+                {
+                    isCharging = false;
+                    switch (objType)
+                    {
+                        case "box":
+                            objectHolding.GetComponent<Box>().Use(direction * 1 * force * forceMultiplier, fleche);
+                            objectHolding.GetComponent<PowerUp>().SetUsed();
+                            break;
+                        case "firework":
+                            objectHolding.GetComponent<Firework>().Use(direction * 1 * force * forceMultiplier, fleche);
+                            objectHolding.GetComponent<PowerUp>().SetUsed();
+                            break;
+                        default:
+                            break;
+                    }
+                    flecheSpriteRenderer.color = Color.white;
+                    pourcent = 0;
+                    fleche.transform.localScale = new Vector3(flecheMinScale, fleche.transform.localScale.y, fleche.transform.localScale.z);
+                    objectHolding = null;
+                    objType = "";
+                    holding = false;
+                    throwable = false;
+                }
+            }
+            GameManager.Instance.UpdateUI(gameObject);
+        }
+
+    }
+
+    public void Move(InputAction.CallbackContext ctx) //Stick
+    {
+        if (!isFrozen)
+        {
+            direction = ctx.ReadValue<Vector2>();
+
+            if (direction.magnitude < 0.3)
+                direction = oldDirection;
+            else
+            {
+                direction = direction.normalized;
+                oldDirection = direction;
+                fleche.SetActive(true);
+                fleche.transform.localPosition = direction * rayon;
+                fleche.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x) - offsetFleche);
+            }
+        }
+
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("PowerUp") && !holding)
         {
@@ -225,6 +254,7 @@ public class PlayerController : MonoBehaviour
                         objectHolding.GetComponent<Box>().player = gameObject;
                         break;
                     case "firework":
+                        objectHolding.GetComponent<Firework>().player = gameObject;
                         break;
                     case "invisible":
                         Color temp = gameObject.GetComponent<SpriteRenderer>().color;
@@ -232,34 +262,65 @@ public class PlayerController : MonoBehaviour
                         gameObject.GetComponent<SpriteRenderer>().color = temp;
                         temp = ball.GetComponent<SpriteRenderer>().color;
                         temp.a = 0.2f;
-                        ball.GetComponent<SpriteRenderer>().color=temp;
+                        ball.GetComponent<SpriteRenderer>().color = temp;
                         StartCoroutine(invisible());
                         break;
 
                 }
             }
         }
-        GameManager.Instance.UpdateUI(gameObject);
     }
+
+    public void StartRespawn(GameObject go)
+    {
+        StartCoroutine(Respawn(go));
+    }
+
+    IEnumerator Respawn(GameObject toRespawn)
+    {
+        float to = toRespawn.GetComponent<PowerUp>().timeout;
+
+        toRespawn.SetActive(false);
+        yield return new WaitForSeconds(to);
+        toRespawn.SetActive(true);
+        toRespawn.GetComponent<PowerUp>().used = false;
+        toRespawn.transform.position = toRespawn.GetComponent<PowerUp>().startingPos;
+        toRespawn.transform.localScale = toRespawn.GetComponent<PowerUp>().startingSize;
+
+    }
+
     IEnumerator invisible()
     {
         invisi = true;
         yield return new WaitForSeconds(invisibleTime);
         invisi = false;
+        StartCoroutine(Respawn(objectHolding));
         holding = false;
         objectHolding = null;
         objType = "";
+        Color temp = gameObject.GetComponent<SpriteRenderer>().color;
+        temp.a = 1f;
+        gameObject.GetComponent<SpriteRenderer>().color = temp;
+        temp = ball.GetComponent<SpriteRenderer>().color;
+        temp.a = 1f;
+        ball.GetComponent<SpriteRenderer>().color = temp;
+        GameManager.Instance.UpdateUI(gameObject);
+
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Enemy" && !invincible)
         {
-            colObjectives.objective.transform.position = transform.position;
+            bool wasHolding = false;
+            if (colObjectives.holdingObjective)
+            {
+                colObjectives.objective.transform.position = transform.position;
+                colObjectives.holdingObjective = false;
+                wasHolding = true;
+            }
 
             objectHolding = null;
             holding = false;
-            colObjectives.holdingObjective = false;
-            colObjectives.objective = null;
 
             Instantiate(deathParticles, transform.position, Quaternion.identity);
 
@@ -286,8 +347,15 @@ public class PlayerController : MonoBehaviour
                     break;
             }
 
-            colObjectives.objective.SetActive(true);
-            colObjectives.holdingObjective = false;
+            if (wasHolding)
+            {
+                colObjectives.holdingObjective = false;
+                colObjectives.objective.SetActive(true);
+                colObjectives.objective = null;
+            }
+
+            collision.gameObject.GetComponent<VisionEnemy>().StopChase();
+
         }
         else
         {
@@ -301,7 +369,6 @@ public class PlayerController : MonoBehaviour
                     break;
             }
         }
-        GameManager.Instance.UpdateUI(gameObject);
     }
 }
 

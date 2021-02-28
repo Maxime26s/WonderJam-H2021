@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class zap : MonoBehaviour
 {
-    public GameObject zap1, zap2;
+    public GameObject zap1, zap2, dz1, dz2;
     public bool left1;
     public bool left2;
     public void tp(Collider2D collision, GameObject zap)
@@ -24,11 +24,11 @@ public class zap : MonoBehaviour
     }
     public void leaving(GameObject zap)
     {
-        if (zap == zap1)
+        if (zap == dz1)
         {
             left1 = true;
         }
-        else if (zap == zap2)
+        else if (zap == dz2)
         {
             left2 = true;
         }

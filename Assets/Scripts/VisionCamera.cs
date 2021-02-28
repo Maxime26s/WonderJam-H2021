@@ -10,7 +10,7 @@ public class VisionCamera : MonoBehaviour
     public LayerMask layerMask;
     public float lastHitTime;
     public float rotationAngle, speed;
-    float actualAngle, startAngle, maxAngle, minAngle;
+    public float actualAngle, startAngle, maxAngle, minAngle;
     bool reverse = false;
     public Color colorIdle, colorFound;
     public Light2D lightVision;
@@ -18,7 +18,7 @@ public class VisionCamera : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        startAngle = transform.position.z;
+        startAngle = transform.rotation.eulerAngles.z;
         maxAngle = startAngle + rotationAngle / 2f;
         minAngle = startAngle - rotationAngle / 2f;
         actualAngle = startAngle;
@@ -39,8 +39,8 @@ public class VisionCamera : MonoBehaviour
         {
             float angle = startAngle + i * fov * Mathf.Deg2Rad / nbRay;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), range, layerMask);
-            Debug.DrawRay(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * range, Color.green);
-            if (hit.collider != null && hit.collider.tag == "Player")
+            //Debug.DrawRay(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * range, Color.green);
+            if (hit.collider != null && hit.collider.tag == "Player" && !hit.collider.gameObject.GetComponent<PlayerController>().invisi)
                 if (!GameManager.Instance.isSuperAlert)
                     GameManager.Instance.SuperAlert(hit.collider.transform);
         }

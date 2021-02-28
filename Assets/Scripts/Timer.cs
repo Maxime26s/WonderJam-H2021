@@ -16,6 +16,7 @@ public class Timer : MonoBehaviour
     {
         if (timer == null)
             timer = GetComponentInChildren<TextMeshProUGUI>();
+        RefreshText();
     }
 
     void Update()
@@ -64,7 +65,7 @@ public class Timer : MonoBehaviour
             seconds = 0;
             miliseconds = 0;
             running = false;
-            GameManager.Instance.GoNext();
+            GameManager.Instance.TimeOut();
         }
         RefreshText();
     }

@@ -26,26 +26,44 @@ public class VisionEnemy : MonoBehaviour
         Vector3 direction = rb.velocity;
         float startAngle = (Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x) - fov / 2) * Mathf.Deg2Rad;
         int nbRay = (int)Mathf.Ceil(fov);
+        float smallestDistance = Mathf.Infinity;
+        Transform closest = null;
+
         for (int i = 0; i < nbRay; i++)
         {
             float angle = startAngle + i * fov * Mathf.Deg2Rad / nbRay;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), range, layerMask);
-            Debug.DrawRay(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * range, Color.green);
-            if (hit.collider != null && hit.collider.tag == "Player")
-                Chase(hit);
+            //Debug.DrawRay(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * range, Color.green);
+            if (hit.collider != null && hit.collider.tag == "Player" && !hit.collider.gameObject.GetComponent<PlayerController>().invisi)
+            {
+                float currentDist = Vector3.Distance(hit.point, rb.position);
+                if (i == 0 || currentDist < smallestDistance)
+                {
+                    closest = hit.collider.transform;
+                    smallestDistance = currentDist;
+                }
+            }
         }
-        if (ai.chasing && Time.time - lastHitTime > 3f)
+        if(closest != null)
+            Chase(closest);
+        if ((ai.chasing && Time.time - lastHitTime > 3f) || (ai.chasing && ai.target.GetComponent<PlayerController>().invisi))
         {
-            ai.target = ai.route[ai.routeIndex];
-            ai.chasing = false;
-            lightVision.color = colorIdle;
+            StopChase();
         }
     }
-    void Chase(RaycastHit2D hit)
+
+    public void StopChase()
+    {
+        ai.target = ai.route[ai.routeIndex];
+        ai.chasing = false;
+        lightVision.color = colorIdle;
+    }
+
+    void Chase(Transform hitTransform)
     {
         ai.chasing = true;
         lastHitTime = Time.time;
-        ai.target = hit.collider.transform;
+        ai.target = hitTransform;
         lightVision.color = colorFound;
     }
 }
