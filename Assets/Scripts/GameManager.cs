@@ -30,8 +30,11 @@ public class GameManager : MonoBehaviour
     public GameObject policeEffect1, policeEffect2;
     public int world = 1, level = -1;
     public string levelName = "";
-    public TextMeshPro title;
+    public TextMeshProUGUI title;
     public List<GameObject> panels;
+    public State gameState;
+    public GameObject[] players;
+    public GameObject timer;
 
     [Header("UI")]
     public TextMeshProUGUI textP1;
@@ -44,6 +47,13 @@ public class GameManager : MonoBehaviour
     public Image cashP2;
     public Sprite[] cashIcons;
     public Sprite transparent;
+
+    public Animator timerAnimator, showcaseAnimator, summaryAnimator;
+    public GameObject summary;
+    public List<GameObject> collectedP1, collectedP2;
+    public List<GameObject> itemsP1, itemsP2;
+    public TextMeshProUGUI scorep1, scorep2, winner;
+    public GameObject cameraShowcase, cameraSummary;
 
     public void SuperAlert(Transform transform)
     {
@@ -79,6 +89,88 @@ public class GameManager : MonoBehaviour
         loader.LoadNextLevelAdditive(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void Next()
+    {
+        switch (gameState)
+        {
+            case State.Showcase:
+                foreach (GameObject player in players)
+                    player.GetComponent<PlayerController>().isFrozen = false;
+                gameState = State.Playing;
+                timer.GetComponent<Timer>().running = true;
+                timer.SetActive(true);
+                cameraShowcase.SetActive(false);
+                break;
+            case State.Summary:
+                GoNext();
+                break;
+            case State.Playing:
+            default:
+                break;
+        }
+    }
+
+    public void TimeOut()
+    {
+        timer.GetComponent<Timer>().running = false;
+        foreach (GameObject player in players)
+            player.GetComponent<PlayerController>().isFrozen = true;
+        gameState = State.Summary;
+
+
+        scorep1.text = players[0].GetComponent<ColObjectives>().cash.ToString() + " $";
+        scorep2.text = players[1].GetComponent<ColObjectives>().cash.ToString() + " $";
+
+        if (players[0].GetComponent<ColObjectives>().cash < players[1].GetComponent<ColObjectives>().cash)
+            winner.text = "Player 2 remporte la manche!";
+        else
+            winner.text = "Player 1 remporte la manche!";
+
+        for (int i = 0; i < collectedP1.Count; i++)
+        {
+            itemsP1[i].GetComponent<Image>().sprite = collectedP1[i].GetComponent<SpriteRenderer>().sprite;
+        }
+        for (int i = 0; i < collectedP2.Count; i++)
+        {
+            itemsP2[i].GetComponent<Image>().sprite = collectedP2[i].GetComponent<SpriteRenderer>().sprite;
+        }
+        cameraSummary.SetActive(true);
+        summary.SetActive(true);
+        timerAnimator.SetTrigger("Start");
+
+        IEnumerator ShowItem(float temps, int i, PlayerEnum player)
+        {
+            yield return new WaitForSeconds(temps * i);
+            switch (player)
+            {
+                case PlayerEnum.One:
+                    itemsP1[i].SetActive(true);
+                    break;
+                case PlayerEnum.Two:
+                    itemsP2[i].SetActive(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        IEnumerator WaitBeforeShow()
+        {
+            yield return new WaitForSeconds(0.5f);
+            for(int i = 0; i < collectedP1.Count; i++)
+            {
+                StartCoroutine(ShowItem(0.33f, i, PlayerEnum.One));
+            }
+            for (int i = 0; i < collectedP2.Count; i++)
+            {
+                StartCoroutine(ShowItem(0.33f, i, PlayerEnum.One));
+            }
+        }
+
+        StartCoroutine(WaitBeforeShow());
+
+    }
+
     private void OnEnable()
     {
         try
@@ -86,18 +178,18 @@ public class GameManager : MonoBehaviour
             policeEffect1 = GameObject.Find("P2").transform.GetChild(1).gameObject;
             policeEffect2 = GameObject.Find("P2").transform.GetChild(0).gameObject;
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Debug.Log(e.Message);
         }
 
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        players = GameObject.FindGameObjectsWithTag("Player");
         players[0].transform.position = spawn1.transform.position;
         players[1].transform.position = spawn2.transform.position;
 
         title.text = world + " - " + level + "\n" + levelName;
 
-        for(int i = 0; i < 6; i++)
+        for (int i = 0; i < 6; i++)
         {
             if (loot[i] != null)
             {
@@ -112,7 +204,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateUI(GameObject player)
     {
-        if(player.GetComponent<PlayerController>().playerNum == PlayerEnum.One)
+        if (player.GetComponent<PlayerController>().playerNum == PlayerEnum.One)
         {
             textP1.text = player.GetComponent<ColObjectives>().cash.ToString() + "$";
             if (player.GetComponent<ColObjectives>().holdingObjective)
@@ -186,5 +278,11 @@ public class GameManager : MonoBehaviour
                 cashP2.sprite = cashIcons[3];
             }
         }
+    }
+    public enum State
+    {
+        Showcase,
+        Summary,
+        Playing
     }
 }

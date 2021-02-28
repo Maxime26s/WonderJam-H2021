@@ -29,9 +29,10 @@ public class ColObjectives : MonoBehaviour
                 holdingObjective = false;
                 cash += objective.GetComponent<Objectif>().money;
                 //Enlever du UI                Debug.Log(cash);
+                GameManager.Instance.collected++;
+                GameManager.Instance.collectedP1.Add(objective);
                 Destroy(objective);
                 objective = null;
-                GameManager.Instance.collected++;
             }
 
         }
