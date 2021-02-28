@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 314201787}
   - component: {fileID: 314201786}
   - component: {fileID: 314201788}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2620572417716071793}
   - component: {fileID: 2620572417716071792}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 2620572418335838609}
   - component: {fileID: 2779019129606049993}
   - component: {fileID: 369421604}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerNew
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -476,7 +476,7 @@ MonoBehaviour:
   collisionParticles2: {fileID: 7328194476159081241, guid: b27f4b036c9a5264d947696994f7598a, type: 3}
   deathParticles: {fileID: 7772992199544801446, guid: 9430a0d2456db5e4089241c15858a26e, type: 3}
   isCharging: 0
-  chargeStartTime: 55.874786
+  chargeStartTime: 2.2131798
   pourcent: 0
   rb: {fileID: 2779019129606050035}
   flecheSpriteRenderer: {fileID: 2779019130202987033}
@@ -485,10 +485,10 @@ MonoBehaviour:
   ballController: {fileID: 9100000, guid: 33049e4cfb7b8b24cbe19ad12bf7227c, type: 2}
   playerController: {fileID: 9100000, guid: fe2d2d7972a5ee943bf68258076b9515, type: 2}
   color2: {r: 0.6666667, g: 0.69411767, b: 1, a: 1}
-  holding: 0
-  objectHolding: {fileID: 0}
   invincibleRespawnTime: 2
   colObjectives: {fileID: 2620572418335838614}
+  holding: 0
+  objectHolding: {fileID: 0}
 --- !u!95 &369421604
 Animator:
   serializedVersion: 3
@@ -518,7 +518,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2779019130202987032}
   - component: {fileID: 2779019130202987033}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Fleche
   m_TagString: Untagged
   m_Icon: {fileID: 0}

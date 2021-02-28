@@ -10,6 +10,11 @@ public class EnemyAI : MonoBehaviour
     public int routeIndex = 0;
     public bool chasing = false;
     public float distanceminmaxthing;
+    public float maxSpeedChase;
+    public GameObject light;
+    public SpriteRenderer spriteRenderer;
+    public Animator animator;
+    public GameObject shadow;
 
     public float speed = 200f, maxSpeed = 100f;
     public float nextWaypointDistance = 3;
@@ -50,27 +55,49 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (path == null)
-            return;
+        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position);
 
-        if (currentWaypoint >= path.vectorPath.Count)
+        if (direction.magnitude > 0.5)
         {
-            //reachedEndOfPath = true;
-            return;
+            direction = direction.normalized;
+            Vector2 force = direction * speed * Time.deltaTime;
+
+            rb.AddForce(force);
+            if (rb.velocity.magnitude > maxSpeed)
+                rb.velocity = chasing ? direction * maxSpeedChase : rb.velocity.normalized * maxSpeed;
+
+            if (!chasing)
+                light.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(rb.velocity.y, rb.velocity.x) - 90);
+            else
+            {
+                Vector2 dir = (Vector2)target.position - rb.position;
+                light.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(dir.y, dir.x) - 90);
+            }
+
+            if (light.transform.rotation.eulerAngles.z > 270 || light.transform.rotation.eulerAngles.z < 90)
+            {
+                animator.SetBool("Behind", true);
+                //spriteRenderer.sortingLayerName = "Light";
+                shadow.SetActive(true);
+            }
+            else
+            {
+                animator.SetBool("Behind", false);
+                //spriteRenderer.sortingLayerID = 0;
+                shadow.SetActive(false);
+            }  
+
+            if (light.transform.rotation.eulerAngles.z > 0 && light.transform.rotation.eulerAngles.z < 180)
+            {
+                spriteRenderer.flipX = true;
+                shadow.transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else
+            {
+                spriteRenderer.flipX = false;
+                shadow.transform.localScale = new Vector3(1, 1, 1);
+            }
         }
-        else
-        {
-            //reachedEndOfPath = false;
-        }
-
-        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
-
-        rb.AddForce(force);
-        if (rb.velocity.magnitude > maxSpeed)
-            rb.velocity = chasing ? rb.velocity.normalized * maxSpeed : rb.velocity.normalized * maxSpeed / 2f;
-
-        transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(rb.velocity.y, rb.velocity.x));
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
 
