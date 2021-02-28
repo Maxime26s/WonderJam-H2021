@@ -348,6 +348,8 @@ public class PlayerController : MonoBehaviour
                 colObjectives.objective = null;
             }
 
+            collision.gameObject.GetComponent<VisionEnemy>().StopChase();
+
         }
         else
         {

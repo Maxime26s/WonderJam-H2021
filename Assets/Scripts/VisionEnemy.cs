@@ -48,11 +48,17 @@ public class VisionEnemy : MonoBehaviour
             Chase(closest);
         if ((ai.chasing && Time.time - lastHitTime > 3f) || (ai.chasing && ai.target.GetComponent<PlayerController>().invisi))
         {
-            ai.target = ai.route[ai.routeIndex];
-            ai.chasing = false;
-            lightVision.color = colorIdle;
+            StopChase();
         }
     }
+
+    public void StopChase()
+    {
+        ai.target = ai.route[ai.routeIndex];
+        ai.chasing = false;
+        lightVision.color = colorIdle;
+    }
+
     void Chase(Transform hitTransform)
     {
         ai.chasing = true;
