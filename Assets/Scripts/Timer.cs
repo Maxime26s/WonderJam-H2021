@@ -16,6 +16,7 @@ public class Timer : MonoBehaviour
     {
         if (timer == null)
             timer = GetComponentInChildren<TextMeshProUGUI>();
+        RefreshText();
     }
 
     void Update()

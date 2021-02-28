@@ -28,6 +28,10 @@ public class GameManager : MonoBehaviour
     public int collected;
     public bool isSuperAlert = false;
     public GameObject policeEffect1, policeEffect2;
+    public int world = 1, level = -1;
+    public string levelName = "";
+    public TextMeshPro title;
+    public List<GameObject> panels;
 
     [Header("UI")]
     public TextMeshProUGUI textP1;
@@ -90,6 +94,20 @@ public class GameManager : MonoBehaviour
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         players[0].transform.position = spawn1.transform.position;
         players[1].transform.position = spawn2.transform.position;
+
+        title.text = world + " - " + level + "\n" + levelName;
+
+        for(int i = 0; i < 6; i++)
+        {
+            if (loot[i] != null)
+            {
+                Objectif obj = loot[i].GetComponent<Objectif>();
+                panels[i].GetComponentInChildren<TextMeshPro>().text = obj.name + "\n" + obj.money + " $";
+                panels[i].GetComponentInChildren<Image>().sprite = loot[i].GetComponent<SpriteRenderer>().sprite;
+            }
+            else
+                panels[i].SetActive(false);
+        }
     }
 
     public void UpdateUI(GameObject player)
