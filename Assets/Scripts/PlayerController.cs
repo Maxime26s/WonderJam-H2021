@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public bool invisi;
 
     public GameInfo gameInfo;
+    public bool gameStarted = false;
 
     //Collect
     private CircleCollider2D cc2d;
@@ -75,6 +76,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (gameStarted)
+        {
+            GameManager.Instance.UpdateUI(gameObject);
+        }
         if (isCharging)
         {
             pourcent = (Time.time - chargeStartTime) / tempsMaxCharge;
