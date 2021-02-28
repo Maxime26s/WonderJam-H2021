@@ -52,8 +52,15 @@ public class GameManager : MonoBehaviour
             {
                 enemy.GetComponent<EnemyAI>().target = transform;
             }
-            policeEffect1.SetActive(true);
-            policeEffect2.SetActive(true);
+            try
+            {
+                policeEffect1.SetActive(true);
+                policeEffect2.SetActive(true);
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e);
+            }
             yield return new WaitForSeconds(8f);
             isSuperAlert = false;
             foreach (GameObject enemy in enemies)
@@ -84,7 +91,7 @@ public class GameManager : MonoBehaviour
             policeEffect1 = GameObject.Find("P2").transform.GetChild(1).gameObject;
             policeEffect2 = GameObject.Find("P2").transform.GetChild(0).gameObject;
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Debug.Log(e.Message);
         }
@@ -101,21 +108,26 @@ public class GameManager : MonoBehaviour
         {
             spawn1 = spawns[0];
             players[0].transform.position = spawn1.transform.position;
-            cams[0].GetComponent<CinemachineVirtualCamera>().Follow = players[0].transform;
+
+            if (cams[0].layer.Equals("P1 Cam"))
+                cams[0].GetComponent<CinemachineVirtualCamera>().Follow = players[0].transform;
+            else
+                cams[1].GetComponent<CinemachineVirtualCamera>().Follow = players[0].transform;
         }
         if (players.Length > 1)
         {
             spawn1 = spawns[1];
             players[1].transform.position = spawn2.transform.position;
-            cams[1].GetComponent<CinemachineVirtualCamera>().Follow = players[1].transform;
+            if (cams[0].layer.Equals("P2 Cam"))
+                cams[0].GetComponent<CinemachineVirtualCamera>().Follow = players[1].transform;
+            else
+                cams[1].GetComponent<CinemachineVirtualCamera>().Follow = players[1].transform;
         }
-
-
     }
 
     public void UpdateUI(GameObject player)
     {
-        if(player.GetComponent<PlayerController>().playerNum == PlayerEnum.One)
+        if (player.GetComponent<PlayerController>().playerNum == PlayerEnum.One)
         {
             textP1.text = String.Format("{0:n0}$", player.GetComponent<ColObjectives>().cash).Replace(",", " ");
             if (player.GetComponent<ColObjectives>().holdingObjective)
