@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
     {
         if(player.GetComponent<PlayerController>().playerNum == PlayerEnum.One)
         {
-            textP1.text = player.GetComponent<ColObjectives>().cash.ToString() + "$";
+            textP1.text = String.Format("{0:n0}$", player.GetComponent<ColObjectives>().cash).Replace(",", " ");
             if (player.GetComponent<ColObjectives>().holdingObjective)
             {
                 collP1.sprite = player.GetComponent<ColObjectives>().objective.GetComponentInChildren<SpriteRenderer>().sprite;
@@ -154,7 +154,7 @@ public class GameManager : MonoBehaviour
         }
         if (player.GetComponent<PlayerController>().playerNum == PlayerEnum.Two)
         {
-            textP2.text = player.GetComponent<ColObjectives>().cash.ToString() + "$";
+            textP2.text = String.Format("{0:n0}$", player.GetComponent<ColObjectives>().cash).Replace(",", " ");
             if (player.GetComponent<ColObjectives>().holdingObjective)
             {
                 collP2.sprite = player.GetComponent<ColObjectives>().objective.GetComponentInChildren<SpriteRenderer>().sprite;
