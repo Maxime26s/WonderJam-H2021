@@ -246,6 +246,9 @@ public class PlayerController : MonoBehaviour
         invisi = true;
         yield return new WaitForSeconds(invisibleTime);
         invisi = false;
+        holding = false;
+        objectHolding = null;
+        objType = "";
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
