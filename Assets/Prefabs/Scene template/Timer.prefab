@@ -358,7 +358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: {fileID: 7765049626876422260}
   minutes: 1
-  seconds: 0
+  seconds: 30
   miliseconds: 0
   running: 0
   secYellow: 30
