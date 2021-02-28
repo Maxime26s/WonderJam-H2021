@@ -192,10 +192,13 @@ public class GameManager : MonoBehaviour
             Debug.Log(e.Message);
         }
 
+        /*
         players = GameObject.FindGameObjectsWithTag("Player");
         players[0].transform.position = spawn1.transform.position;
         players[1].transform.position = spawn2.transform.position;
+        */
 
+        /*
         title.text = world + " - " + level + "\n" + levelName;
 
         for (int i = 0; i < 6; i++)
@@ -209,6 +212,7 @@ public class GameManager : MonoBehaviour
             else
                 panels[i].SetActive(false);
         }
+        */
         Setup();
     }
 
