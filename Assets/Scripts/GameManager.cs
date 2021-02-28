@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     public State gameState;
     public GameObject[] players;
     public GameObject timer;
+    public GameObject ui;
 
     [Header("UI")]
     public TextMeshProUGUI textP1;
@@ -55,6 +56,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> itemsP1, itemsP2;
     public TextMeshProUGUI scorep1, scorep2, winner;
     public GameObject cameraShowcase, cameraSummary;
+    public CompositeCollider2D confiner;
+    GameObject barreNoire;
 
     public void SuperAlert(Transform transform)
     {
@@ -107,6 +110,8 @@ public class GameManager : MonoBehaviour
                 gameState = State.Playing;
                 timer.GetComponent<Timer>().running = true;
                 timer.SetActive(true);
+                barreNoire.SetActive(true);
+                ui.SetActive(true);
                 showcaseAnimator.SetTrigger("Start");
                 IEnumerator WaitAndDisable()
                 {
@@ -128,11 +133,10 @@ public class GameManager : MonoBehaviour
 
     public void TimeOut()
     {
+        gameState = State.Summary;
         timer.GetComponent<Timer>().running = false;
         foreach (GameObject player in players)
             player.GetComponent<PlayerController>().isFrozen = true;
-        gameState = State.Summary;
-
 
         scorep1.text = players[0].GetComponent<ColObjectives>().cash.ToString() + " $";
         scorep2.text = players[1].GetComponent<ColObjectives>().cash.ToString() + " $";
@@ -153,6 +157,9 @@ public class GameManager : MonoBehaviour
         cameraSummary.SetActive(true);
         summary.SetActive(true);
         timerAnimator.SetTrigger("Start");
+        barreNoire.GetComponentInChildren<Animator>().SetTrigger("Start");
+        ui.GetComponentInChildren<Animator>().SetTrigger("Start");
+
 
         IEnumerator ShowItem(float temps, int i, PlayerEnum player)
         {
@@ -179,7 +186,7 @@ public class GameManager : MonoBehaviour
             }
             for (int i = 0; i < collectedP2.Count; i++)
             {
-                StartCoroutine(ShowItem(0.33f, i, PlayerEnum.One));
+                StartCoroutine(ShowItem(0.33f, i, PlayerEnum.Two));
             }
         }
 
@@ -198,10 +205,14 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log(e.Message);
         }
+        GameInfo gameInfo = GameObject.FindGameObjectWithTag("PlayerInfo").GetComponent<GameInfo>();
 
         players = GameObject.FindGameObjectsWithTag("Player");
         players[0].transform.position = spawn1.transform.position;
         players[1].transform.position = spawn2.transform.position;
+
+        gameInfo.AddConfiner(confiner);
+        barreNoire = gameInfo.barreNoire;
 
         title.text = world + " - " + level + "\n" + levelName;
 
@@ -216,33 +227,6 @@ public class GameManager : MonoBehaviour
             else
                 panels[i].SetActive(false);
         }
-    }
-
-    public void Setup()
-    {
-        /*
-        GameObject[] cams = GameObject.FindGameObjectsWithTag("Camera");
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        GameObject[] spawns = GameObject.FindGameObjectsWithTag("Spawn");
-        if (players.Length > 0)
-        {
-            spawn1 = spawns[0];
-            players[0].transform.position = spawn1.transform.position;
-
-            if (cams[0].layer.Equals("P1 Cam"))
-                cams[0].GetComponent<CinemachineVirtualCamera>().Follow = players[0].transform;
-            else
-                cams[1].GetComponent<CinemachineVirtualCamera>().Follow = players[0].transform;
-        }
-        if (players.Length > 1)
-        {
-            spawn1 = spawns[1];
-            players[1].transform.position = spawn2.transform.position;
-            if (cams[0].layer.Equals("P2 Cam"))
-                cams[0].GetComponent<CinemachineVirtualCamera>().Follow = players[1].transform;
-            else
-                cams[1].GetComponent<CinemachineVirtualCamera>().Follow = players[1].transform;
-        }*/
     }
 
     public void UpdateUI(GameObject player)

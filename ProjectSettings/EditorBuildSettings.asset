@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Tryhard/Menu.unity
     guid: ba629d4568be30146b85d3f931d27347
@@ -18,15 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Tryhard/PlayerInfo.unity
     guid: bb252d60ea6b17b4ba70aacb8e4e1286
   - enabled: 1
-    path: Assets/Scenes/Tryhard/Level 1-1.unity
-    guid: c7a7e1d6cd29c794fb56e00154e23273
-  - enabled: 1
     path: Assets/Scenes/Tryhard/Prologue.unity
     guid: 59bfcde92ddbf7f42862e5b91348215f
   - enabled: 1
-    path: Assets/Scenes/Tryhard/Test1.unity
-    guid: 33c53b85adb4aa44888fcbb2f7609f00
+    path: Assets/Scenes/Tryhard/Level 1-1.unity
+    guid: c7a7e1d6cd29c794fb56e00154e23273
   - enabled: 1
-    path: Assets/Scenes/Tryhard/Test2.unity
-    guid: 54c745b7c8752ab4fbaae717aca26e89
+    path: Assets/Scenes/Tryhard/Epilogue.unity
+    guid: ac548abd81261244eb1e5cf0c17ea6e2
   m_configObjects: {}
