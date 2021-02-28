@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
     public ColObjectives colObjectives;
     Vector2 direction;
 
+    public float invisibleTime;
+    public bool invisi;
+
     //Collect
     private CircleCollider2D cc2d;
     public bool holding = false;
@@ -222,12 +225,27 @@ public class PlayerController : MonoBehaviour
                         break;
                     case "firework":
                         break;
+                    case "invisible":
+                        Color temp = gameObject.GetComponent<SpriteRenderer>().color;
+                        temp.a = 0.2f;
+                        gameObject.GetComponent<SpriteRenderer>().color = temp;
+                        temp = ball.GetComponent<SpriteRenderer>().color;
+                        temp.a = 0.2f;
+                        ball.GetComponent<SpriteRenderer>().color=temp;
+                        StartCoroutine(invisible());
+                        break;
+
                 }
             }
         }
         GameManager.Instance.UpdateUI(gameObject);
     }
-
+    IEnumerator invisible()
+    {
+        invisi = true;
+        yield return new WaitForSeconds(invisibleTime);
+        invisi = false;
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Enemy" && !invincible)
