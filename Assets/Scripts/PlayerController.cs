@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (gameStarted)
+        if (gameStarted && GameManager.Instance != null)
         {
             GameManager.Instance.UpdateUI(gameObject);
         }

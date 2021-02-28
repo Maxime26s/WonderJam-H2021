@@ -207,7 +207,7 @@ public class GameManager : MonoBehaviour
     {
         try
         {
-            policeEffect1 = GameObject.Find("P2").transform.GetChild(0).gameObject;
+            policeEffect1 = GameObject.Find("P1").transform.GetChild(0).gameObject;
             policeEffect2 = GameObject.Find("P2").transform.GetChild(0).gameObject;
         }
         catch (Exception e)
