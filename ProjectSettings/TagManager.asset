@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Camera
   - Spawn
+  - PlayerInfo
   layers:
   - Default
   - TransparentFX
