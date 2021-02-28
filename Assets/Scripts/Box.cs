@@ -23,6 +23,7 @@ public class Box : MonoBehaviour
         transform.rotation = fleche.transform.rotation;
         bc2d.isTrigger = false;
         rb2d.isKinematic = false;
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         /*
         rb2d = gameObject.AddComponent<Rigidbody2D>();
         rb2d.gravityScale = 0;

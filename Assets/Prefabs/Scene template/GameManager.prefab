@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &356136014880470155
+--- !u!1 &6817324841577084900
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 356136014880470165}
-  - component: {fileID: 356136014880470154}
+  - component: {fileID: 6817324841577084922}
+  - component: {fileID: 6817324841577084901}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &356136014880470165
+--- !u!4 &6817324841577084922
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 356136014880470155}
+  m_GameObject: {fileID: 6817324841577084900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,13 +31,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &356136014880470154
+--- !u!114 &6817324841577084901
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 356136014880470155}
+  m_GameObject: {fileID: 6817324841577084900}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a361037222fc05849a1f5c11b7856798, type: 3}
@@ -50,4 +50,19 @@ MonoBehaviour:
   loot: []
   collected: 0
   isSuperAlert: 0
-  policeEffect: {fileID: 0}
+  policeEffect1: {fileID: 0}
+  policeEffect2: {fileID: 0}
+  textP1: {fileID: 0}
+  textP2: {fileID: 0}
+  collP1: {fileID: 0}
+  collP2: {fileID: 0}
+  PUP1: {fileID: 0}
+  PUP2: {fileID: 0}
+  cashP1: {fileID: 0}
+  cashP2: {fileID: 0}
+  cashIcons:
+  - {fileID: 21300000, guid: 364cc6112e26f28488998dbf4f25e074, type: 3}
+  - {fileID: 21300000, guid: 70ba9f11b59f3f2459fda6bd7e57c797, type: 3}
+  - {fileID: 21300000, guid: fb48938d2fa83c34daa0aada1afc0702, type: 3}
+  - {fileID: 21300000, guid: acc71ae9b97c8864f8d24114265ca6d9, type: 3}
+  transparent: {fileID: 21300000, guid: 0081561cc6b65f94e899f4754cb05ac0, type: 3}
