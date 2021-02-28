@@ -66,8 +66,6 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log(e.Message);
         }
-        GameManager.Instance.UpdateUI(gameObject);
-        GameManager.Instance.Setup();
     }
 
     private void Update()
@@ -165,7 +163,13 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            GameManager.Instance.Next();
+            if (!GameInfo.Instance.started)
+            {
+                GameInfo.Instance.started = true;
+                GameInfo.Instance.lobbyScript.StartGame();
+            }
+            else if(GameManager.Instance != null)
+                GameManager.Instance.Next();
         }
 
     }
@@ -265,7 +269,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        GameManager.Instance.UpdateUI(gameObject);
     }
 
     public void StartRespawn(GameObject go)
@@ -364,7 +367,6 @@ public class PlayerController : MonoBehaviour
                     break;
             }
         }
-        GameManager.Instance.UpdateUI(gameObject);
     }
 }
 

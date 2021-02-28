@@ -65,7 +65,7 @@ public class Timer : MonoBehaviour
             seconds = 0;
             miliseconds = 0;
             running = false;
-            GameManager.Instance.GoNext();
+            GameManager.Instance.TimeOut();
         }
         RefreshText();
     }

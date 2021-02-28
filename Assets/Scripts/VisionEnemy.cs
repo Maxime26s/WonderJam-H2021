@@ -30,7 +30,7 @@ public class VisionEnemy : MonoBehaviour
         {
             float angle = startAngle + i * fov * Mathf.Deg2Rad / nbRay;
             RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), range, layerMask);
-            Debug.DrawRay(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * range, Color.green);
+            //Debug.DrawRay(transform.position, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * range, Color.green);
             if (hit.collider != null && hit.collider.tag == "Player" && !hit.collider.gameObject.GetComponent<PlayerController>().invisi)
                 Chase(hit);
         }
