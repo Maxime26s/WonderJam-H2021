@@ -165,7 +165,7 @@ public class PlayerController : MonoBehaviour
                 gameInfo.started = true;
                 gameInfo.lobbyScript.StartGame();
             }
-            else if (SceneManager.GetActiveScene().name == "Prologue" && !gameInfo.prologue || SceneManager.GetActiveScene().name == "Epilogue" && !gameInfo.epilogue)
+            else if (gameInfo != null && (SceneManager.GetActiveScene().name == "Prologue" && !gameInfo.prologue || SceneManager.GetActiveScene().name == "Epilogue" && !gameInfo.epilogue))
             {
                 if (!gameInfo.prologue)
                 {

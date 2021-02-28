@@ -3315,12 +3315,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -3377,7 +3377,7 @@ GameObject:
   m_Component:
   - component: {fileID: 750836528}
   - component: {fileID: 750836526}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Ball (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3493,7 +3493,7 @@ MonoBehaviour:
   streetMoveSpeed: 3
   buildingMoveSpeed: 2
   skyMoveSpeed: 1
-  textMoveSpeed: 60
+  textMoveSpeed: 90
   loader: {fileID: 1401461433}
 --- !u!4 &1164338286
 Transform:
@@ -3871,8 +3871,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -550}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -818}
+  m_SizeDelta: {x: 0, y: -530}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1516656647
 MonoBehaviour:
@@ -3900,8 +3900,6 @@ MonoBehaviour:
 
 
 
-
-
     They are planning to create a machine that turns everyone
     into fossils and add their bones to the exhibits
 
@@ -3909,28 +3907,20 @@ MonoBehaviour:
 
 
 
-
-
-    You need to steal
-    everything in the museum to prevent people from wanting to go and pay the entrance
-    fees
+    You need to steal everything
+    in the museum to prevent people from wanting to go and pay the entrance fees
 
 
 
 
-
-
-    No money, no fossil machine
-
-
+    No
+    money, no fossil machine
 
 
 
 
-    Your organization provided
-    you with a Sneaky Ultra Sphere (SUS) to steal everything
-
-
+    Your organization provided you with a Sneaky
+    Ultra Sphere (SUS) to steal everything
 
 
 
@@ -3938,8 +3928,8 @@ MonoBehaviour:
 
     Good luck'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: faa3ee16adc9e23458353f1181401cab, type: 2}
-  m_sharedMaterial: {fileID: 4447087359992731219, guid: faa3ee16adc9e23458353f1181401cab, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 55f20a0768f251e4eacdc7103cbc96ed, type: 2}
+  m_sharedMaterial: {fileID: 1414807754656450787, guid: 55f20a0768f251e4eacdc7103cbc96ed, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3963,10 +3953,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 56.2
+  m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 40
   m_fontSizeMax: 1000
   m_fontStyle: 1
@@ -3999,7 +3989,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 30, y: 30, z: 30, w: -1682.0391}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -12064,7 +12054,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8556557002747135910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.97, y: -1.39, z: 0}
+  m_LocalPosition: {x: -8.97, y: -1.39, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 5778101205792883154}
