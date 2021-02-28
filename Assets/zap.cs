@@ -5,8 +5,8 @@ using UnityEngine;
 public class zap : MonoBehaviour
 {
     public GameObject zap1, zap2;
-    private bool left1;
-    private bool left2;
+    public bool left1;
+    public bool left2;
     public void tp(Collider2D collision, GameObject zap)
     {
         if(zap == zap1 && left1)
