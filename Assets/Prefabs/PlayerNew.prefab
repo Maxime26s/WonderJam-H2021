@@ -487,8 +487,10 @@ MonoBehaviour:
   color2: {r: 0.6666667, g: 0.69411767, b: 1, a: 1}
   invincibleRespawnTime: 2
   colObjectives: {fileID: 2620572418335838614}
-  invisibleTime: 5
+  isFrozen: 1
+  invisibleTime: 10
   invisi: 0
+  gameInfo: {fileID: 0}
   holding: 0
   objectHolding: {fileID: 0}
 --- !u!95 &369421604
