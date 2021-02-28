@@ -36,7 +36,7 @@ public class VisionEnemy : MonoBehaviour
         }
         if (ai.chasing && Time.time - lastHitTime > 3f)
         {
-            ai.target = ai.route[0];
+            ai.target = ai.route[ai.routeIndex];
             ai.chasing = false;
             lightVision.color = colorIdle;
         }
