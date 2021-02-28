@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public float invincibleRespawnTime = 2f;
     public ColObjectives colObjectives;
     public bool isFrozen = true;
-    Vector2 direction;
+    Vector2 direction, oldDirection;
 
     public float invisibleTime;
     public bool invisi;
@@ -210,24 +210,18 @@ public class PlayerController : MonoBehaviour
     {
         if (!isFrozen)
         {
-            /*
-            float oldAngle = transform.rotation.z;
-            float newAngle = Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x) - offsetFleche;
-            Mathf.Lerp(oldAngle, newAngle, 0.1f);
-            */
             direction = ctx.ReadValue<Vector2>();
 
             if (direction.magnitude < 0.3)
-                fleche.SetActive(false);
+                direction = oldDirection;
             else
             {
+                direction = direction.normalized;
+                oldDirection = direction;
                 fleche.SetActive(true);
+                fleche.transform.localPosition = direction * rayon;
+                fleche.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x) - offsetFleche);
             }
-
-            direction = direction.normalized;
-
-            fleche.transform.localPosition = direction * rayon;
-            fleche.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x) - offsetFleche);
         }
 
     }
