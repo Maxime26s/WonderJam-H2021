@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log(e.Message);
         }
         GameManager.Instance.UpdateUI(gameObject);
+        GameManager.Instance.Setup();
     }
 
     private void Update()
@@ -236,6 +237,8 @@ public class PlayerController : MonoBehaviour
 
             objectHolding = null;
             holding = false;
+            colObjectives.holdingObjective = false;
+            colObjectives.objective = null;
 
             Instantiate(deathParticles, transform.position, Quaternion.identity);
 

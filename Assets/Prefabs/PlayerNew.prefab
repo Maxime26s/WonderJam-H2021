@@ -476,7 +476,7 @@ MonoBehaviour:
   collisionParticles2: {fileID: 7328194476159081241, guid: b27f4b036c9a5264d947696994f7598a, type: 3}
   deathParticles: {fileID: 7772992199544801446, guid: 9430a0d2456db5e4089241c15858a26e, type: 3}
   isCharging: 0
-  chargeStartTime: 49.373142
+  chargeStartTime: 42.953587
   pourcent: 0
   rb: {fileID: 2779019129606050035}
   flecheSpriteRenderer: {fileID: 2779019130202987033}

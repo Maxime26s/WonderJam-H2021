@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using System;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
     public int collected;
     public bool isSuperAlert = false;
     public GameObject policeEffect1, policeEffect2;
+    public GameObject cam1, cam2;
 
     [Header("UI")]
     public TextMeshProUGUI textP1;
@@ -87,9 +89,28 @@ public class GameManager : MonoBehaviour
             Debug.Log(e.Message);
         }
 
+        Setup();
+    }
+
+    public void Setup()
+    {
+        GameObject[] cams = GameObject.FindGameObjectsWithTag("Camera");
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        players[0].transform.position = spawn1.transform.position;
-        players[1].transform.position = spawn2.transform.position;
+        GameObject[] spawns = GameObject.FindGameObjectsWithTag("Spawn");
+        if (players.Length > 0)
+        {
+            spawn1 = spawns[0];
+            players[0].transform.position = spawn1.transform.position;
+            cams[0].GetComponent<CinemachineVirtualCamera>().Follow = players[0].transform;
+        }
+        if (players.Length > 1)
+        {
+            spawn1 = spawns[1];
+            players[1].transform.position = spawn2.transform.position;
+            cams[1].GetComponent<CinemachineVirtualCamera>().Follow = players[1].transform;
+        }
+
+
     }
 
     public void UpdateUI(GameObject player)
