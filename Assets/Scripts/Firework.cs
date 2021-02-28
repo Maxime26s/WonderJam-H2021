@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Firework : MonoBehaviour
 {
+    public GameObject player;
     BoxCollider2D bc2d;
     Rigidbody2D rb2d;
     Vector2 forceV = new Vector2(0,0);
@@ -19,6 +20,15 @@ public class Firework : MonoBehaviour
         bc2d = gameObject.GetComponent<BoxCollider2D>();
         rb2d = gameObject.GetComponent<Rigidbody2D>();
         rb2d.isKinematic = true;
+        bc2d.isTrigger = true;
+    }
+
+    private void OnEnable()
+    {
+        bc2d = gameObject.GetComponent<BoxCollider2D>();
+        rb2d = gameObject.GetComponent<Rigidbody2D>();
+        rb2d.isKinematic = true;
+        bc2d.isTrigger = true;
     }
 
     // Update is called once per frame
@@ -56,6 +66,8 @@ public class Firework : MonoBehaviour
             }
         }
         Instantiate(collisionParticles, collision.GetContact(0).point, Quaternion.identity);
-        Destroy(gameObject);
+        Debug.Log("oy");
+        player.GetComponent<PlayerController>().StartRespawn(gameObject);
+        //Destroy(gameObject);
     }
 }

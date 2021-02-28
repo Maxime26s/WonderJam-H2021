@@ -159,6 +159,9 @@ MonoBehaviour:
   type: firework
   throwable: 1
   used: 0
+  timeout: 20
+  startingPos: {x: 0, y: 0}
+  startingSize: {x: 0, y: 0}
 --- !u!50 &2610084597656195018
 Rigidbody2D:
   serializedVersion: 4
@@ -192,9 +195,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78d5356e26fcd53468bbba4dc04fa449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   collisionParticles: {fileID: 2923971485880258624, guid: b6e0691124dc07b4080219c607cf5c54, type: 3}
   radius: 10
-  forceMultiplier: 2500
+  forceMultiplier: 1000
 --- !u!1 &5488973654604773194
 GameObject:
   m_ObjectHideFlags: 0

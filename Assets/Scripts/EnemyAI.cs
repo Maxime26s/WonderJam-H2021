@@ -55,6 +55,9 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (path == null)
+            return;
+
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position);
 
         if (direction.magnitude > 0.5)
