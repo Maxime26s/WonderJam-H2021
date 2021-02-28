@@ -49,6 +49,13 @@ public class GameInfo : MonoBehaviour
         }
     }
 
+    public void AddConfiner(Collider2D confiner)
+    {
+        CinemachineConfiner cineConfiner1 = vcam1.GetComponent<CinemachineConfiner>(), cineConfiner2 = vcam2.GetComponent<CinemachineConfiner>();
+        cineConfiner1.m_BoundingShape2D = confiner;
+        cineConfiner2.m_BoundingShape2D = confiner;
+    }
+
     private void Start()
     {
         lobbyScript = GameObject.Find("LobbyScript").GetComponent<LobbyScript>();

@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> itemsP1, itemsP2;
     public TextMeshProUGUI scorep1, scorep2, winner;
     public GameObject cameraShowcase, cameraSummary;
+    public CompositeCollider2D confiner;
     GameObject barreNoire;
 
     public void SuperAlert(Transform transform)
@@ -204,12 +205,14 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log(e.Message);
         }
+        GameInfo gameInfo = GameObject.FindGameObjectWithTag("PlayerInfo").GetComponent<GameInfo>();
 
         players = GameObject.FindGameObjectsWithTag("Player");
         players[0].transform.position = spawn1.transform.position;
         players[1].transform.position = spawn2.transform.position;
 
-        barreNoire = GameObject.FindGameObjectWithTag("PlayerInfo").GetComponent<GameInfo>().barreNoire;
+        gameInfo.AddConfiner(confiner);
+        barreNoire = gameInfo.barreNoire;
 
         title.text = world + " - " + level + "\n" + levelName;
 
