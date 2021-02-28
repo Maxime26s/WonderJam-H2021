@@ -106,6 +106,8 @@ public class GameManager : MonoBehaviour
         foreach (GameObject e in enemies)
             Destroy(e);
         Destroy(GameObject.FindGameObjectWithTag("Astar"));
+        policeEffect1.SetActive(false);
+        policeEffect2.SetActive(false);
         Destroy(gameObject);
     }
 
@@ -145,7 +147,17 @@ public class GameManager : MonoBehaviour
         gameState = State.Summary;
         timer.GetComponent<Timer>().running = false;
         foreach (GameObject player in players)
+        {
             player.GetComponent<PlayerController>().isFrozen = true;
+            player.GetComponent<PlayerController>().objectHolding = null;
+            player.GetComponent<PlayerController>().holding = false;
+            player.GetComponent<PlayerController>().invisi = false;
+            player.GetComponent<ColObjectives>().holdingObjective = false;
+            player.GetComponent<ColObjectives>().objective = null;
+            player.GetComponent<PlayerController>().isCharging = false;
+            player.GetComponent<PlayerController>().pourcent = 0;
+        }
+            
 
         scorep1.text = players[0].GetComponent<ColObjectives>().cash.ToString() + " $";
         scorep2.text = players[1].GetComponent<ColObjectives>().cash.ToString() + " $";
@@ -207,7 +219,7 @@ public class GameManager : MonoBehaviour
     {
         try
         {
-            policeEffect1 = GameObject.Find("P2").transform.GetChild(0).gameObject;
+            policeEffect1 = GameObject.Find("P1").transform.GetChild(0).gameObject;
             policeEffect2 = GameObject.Find("P2").transform.GetChild(0).gameObject;
         }
         catch (Exception e)
