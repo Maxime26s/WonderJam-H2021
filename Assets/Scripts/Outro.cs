@@ -22,6 +22,7 @@ public class Outro : MonoBehaviour
     private Vector3 initialSky;
     public Vector3[] initialCars;
     private bool moving;
+    private bool over = false, done = false;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +50,12 @@ public class Outro : MonoBehaviour
     void Update()
     {
         player.GetComponent<Animator>().SetBool("Running", true);
+
+        if (over && !done)
+        {
+            done = true;
+            GameObject.Find("LevelLoader").GetComponent<LevelLoader>().LoadMenu();
+        }
     }
 
     public IEnumerator MoveStreet()
@@ -103,6 +110,7 @@ public class Outro : MonoBehaviour
             text.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, text.GetComponent<RectTransform>().anchoredPosition.y + textMoveSpeed * Time.deltaTime, 0);
             yield return null;
         }
+        over = true;
     }
 
     public IEnumerator MoveCars()
