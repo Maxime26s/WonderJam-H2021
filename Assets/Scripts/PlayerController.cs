@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     public GameObject ball;
     public RuntimeAnimatorController ballController, playerController;
     public Color color2;
+    public float invincibleRespawnTime = 2f;
+    public ColObjectives colObjectives;
     Vector2 direction;
 
     public float invisibleTime;
@@ -27,12 +29,13 @@ public class PlayerController : MonoBehaviour
 
     //Collect
     private CircleCollider2D cc2d;
-    private bool holding = false;
-    private GameObject objectHolding;
+    public bool holding = false;
+    public GameObject objectHolding;
     string objType;
     bool throwable;
     private Animator ballAnimator;
     private Animator playerAnimator;
+    bool invincible = false;
 
     private void Awake()
     {
@@ -62,6 +65,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log(e.Message);
         }
+        GameManager.Instance.UpdateUI(gameObject);
     }
 
     private void Update()
@@ -105,6 +109,7 @@ public class PlayerController : MonoBehaviour
             isCharging = true;
             chargeStartTime = Time.time;
         }
+        GameManager.Instance.UpdateUI(gameObject);
     }
 
     public void Release(InputAction.CallbackContext ctx)
@@ -118,6 +123,7 @@ public class PlayerController : MonoBehaviour
             pourcent = 0;
             fleche.transform.localScale = new Vector3(flecheMinScale, fleche.transform.localScale.y, fleche.transform.localScale.z);
         }
+        GameManager.Instance.UpdateUI(gameObject);
     }
 
     public void Use(InputAction.CallbackContext ctx)
@@ -143,6 +149,7 @@ public class PlayerController : MonoBehaviour
                 chargeStartTime = Time.time;
             }
         }
+        GameManager.Instance.UpdateUI(gameObject);
     }
 
     public void UseRelease(InputAction.CallbackContext ctx)
@@ -155,8 +162,14 @@ public class PlayerController : MonoBehaviour
                 switch (objType)
                 {
                     case "box":
-                        objectHolding.GetComponent<Box>().Use(direction * pourcent * force * forceMultiplier, fleche);
+                        objectHolding.GetComponent<Box>().Use(direction * 1 * force * forceMultiplier, fleche);
                         objectHolding.GetComponent<PowerUp>().SetUsed();
+                        break;
+                    case "firework":
+                        objectHolding.GetComponent<Firework>().Use(direction * 1 * force * forceMultiplier, fleche);
+                        objectHolding.GetComponent<PowerUp>().SetUsed();
+                        break;
+                    default:
                         break;
                 }
                 flecheSpriteRenderer.color = Color.white;
@@ -168,6 +181,7 @@ public class PlayerController : MonoBehaviour
                 throwable = false;
             }
         }
+        GameManager.Instance.UpdateUI(gameObject);
     }
 
     public void Move(InputAction.CallbackContext ctx)
@@ -194,7 +208,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("PowerUp"))
+        if (collision.gameObject.CompareTag("PowerUp") && !holding)
         {
             holding = true;
             objectHolding = collision.gameObject;
@@ -209,6 +223,8 @@ public class PlayerController : MonoBehaviour
                     case "box":
                         objectHolding.GetComponent<Box>().player = gameObject;
                         break;
+                    case "firework":
+                        break;
                     case "invisible":
                         Color temp = gameObject.GetComponent<SpriteRenderer>().color;
                         temp.a = 0.2f;
@@ -222,6 +238,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        GameManager.Instance.UpdateUI(gameObject);
     }
     IEnumerator invisible()
     {
@@ -231,15 +248,23 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Enemy")
+        if (collision.collider.tag == "Enemy" && !invincible)
         {
-            //TODO: Drop items
+            colObjectives.objective.transform.position = transform.position;
 
-            //TODO: Lose powerups
-
-            //TODO: Lose points
+            objectHolding = null;
+            holding = false;
 
             Instantiate(deathParticles, transform.position, Quaternion.identity);
+
+            IEnumerator Respawning()
+            {
+                invincible = true;
+                yield return new WaitForSeconds(invincibleRespawnTime);
+                invincible = false;
+            }
+
+            StartCoroutine(Respawning());
 
             switch (playerNum)
             {
@@ -254,6 +279,9 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("GIVE THIS PLAYER A NUMBER!!!");
                     break;
             }
+
+            colObjectives.objective.SetActive(true);
+            colObjectives.holdingObjective = false;
         }
         else
         {
@@ -267,6 +295,7 @@ public class PlayerController : MonoBehaviour
                     break;
             }
         }
+        GameManager.Instance.UpdateUI(gameObject);
     }
 }
 
