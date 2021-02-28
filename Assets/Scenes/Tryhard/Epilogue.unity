@@ -5523,7 +5523,7 @@ MonoBehaviour:
     : 3000$'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 55f20a0768f251e4eacdc7103cbc96ed, type: 2}
-  m_sharedMaterial: {fileID: 1414807754656450787, guid: 55f20a0768f251e4eacdc7103cbc96ed, type: 2}
+  m_sharedMaterial: {fileID: -3404089741031422885, guid: 55f20a0768f251e4eacdc7103cbc96ed, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
