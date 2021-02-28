@@ -22,7 +22,7 @@ public class PowerUp : MonoBehaviour
 
     public void OnCollection()
     {
-        transform.localScale = new Vector2(1, 1);
+        transform.localScale = new Vector2(1.5f, 1.5f);
         gameObject.SetActive(false);
         //Ajouter au UI
     }

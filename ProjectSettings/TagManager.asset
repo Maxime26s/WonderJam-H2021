@@ -8,6 +8,8 @@ TagManager:
   - Zone
   - Objectif
   - Enemy
+  - Camera
+  - Spawn
   layers:
   - Default
   - TransparentFX
