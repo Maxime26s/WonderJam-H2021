@@ -8,6 +8,14 @@ public class PowerUp : MonoBehaviour
     public bool throwable;
     public bool used = false;
     private float zoomSpeed = 0.24f;
+    public float timeout;
+    public Vector2 startingPos, startingSize;
+
+    private void Start()
+    {
+        startingPos = transform.localPosition;
+        startingSize = transform.localScale;
+    }
 
     private void Update()
     {

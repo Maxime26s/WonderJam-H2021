@@ -106,7 +106,7 @@ MonoBehaviour:
   routeIndex: 0
   chasing: 0
   distanceminmaxthing: 2
-  maxSpeedChase: 5
+  maxSpeedChase: 2.5
   light: {fileID: 3105879624620134453}
   spriteRenderer: {fileID: 2045891900053849138}
   animator: {fileID: 525240114147048640}

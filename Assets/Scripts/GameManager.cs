@@ -66,8 +66,15 @@ public class GameManager : MonoBehaviour
             {
                 enemy.GetComponent<EnemyAI>().target = transform;
             }
-            policeEffect1.SetActive(true);
-            policeEffect2.SetActive(true);
+            try
+            {
+                policeEffect1.SetActive(true);
+                policeEffect2.SetActive(true);
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e);
+            }
             yield return new WaitForSeconds(8f);
             isSuperAlert = false;
             foreach (GameObject enemy in enemies)
@@ -185,10 +192,13 @@ public class GameManager : MonoBehaviour
             Debug.Log(e.Message);
         }
 
+        /*
         players = GameObject.FindGameObjectsWithTag("Player");
         players[0].transform.position = spawn1.transform.position;
         players[1].transform.position = spawn2.transform.position;
+        */
 
+        /*
         title.text = world + " - " + level + "\n" + levelName;
 
         for (int i = 0; i < 6; i++)
@@ -202,6 +212,7 @@ public class GameManager : MonoBehaviour
             else
                 panels[i].SetActive(false);
         }
+        */
         Setup();
     }
 
@@ -214,16 +225,21 @@ public class GameManager : MonoBehaviour
         {
             spawn1 = spawns[0];
             players[0].transform.position = spawn1.transform.position;
-            cams[0].GetComponent<CinemachineVirtualCamera>().Follow = players[0].transform;
+
+            if (cams[0].layer.Equals("P1 Cam"))
+                cams[0].GetComponent<CinemachineVirtualCamera>().Follow = players[0].transform;
+            else
+                cams[1].GetComponent<CinemachineVirtualCamera>().Follow = players[0].transform;
         }
         if (players.Length > 1)
         {
             spawn1 = spawns[1];
             players[1].transform.position = spawn2.transform.position;
-            cams[1].GetComponent<CinemachineVirtualCamera>().Follow = players[1].transform;
+            if (cams[0].layer.Equals("P2 Cam"))
+                cams[0].GetComponent<CinemachineVirtualCamera>().Follow = players[1].transform;
+            else
+                cams[1].GetComponent<CinemachineVirtualCamera>().Follow = players[1].transform;
         }
-
-
     }
 
     public void UpdateUI(GameObject player)

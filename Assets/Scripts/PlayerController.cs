@@ -250,6 +250,7 @@ public class PlayerController : MonoBehaviour
                         objectHolding.GetComponent<Box>().player = gameObject;
                         break;
                     case "firework":
+                        objectHolding.GetComponent<Firework>().player = gameObject;
                         break;
                     case "invisible":
                         Color temp = gameObject.GetComponent<SpriteRenderer>().color;
@@ -266,25 +267,57 @@ public class PlayerController : MonoBehaviour
         }
         GameManager.Instance.UpdateUI(gameObject);
     }
+
+    public void StartRespawn(GameObject go)
+    {
+        StartCoroutine(Respawn(go));
+    }
+
+    IEnumerator Respawn(GameObject toRespawn)
+    {
+        float to = toRespawn.GetComponent<PowerUp>().timeout;
+        
+        toRespawn.SetActive(false);
+        yield return new WaitForSeconds(to);
+        toRespawn.SetActive(true);
+        toRespawn.GetComponent<PowerUp>().used = false;
+        toRespawn.transform.position = toRespawn.GetComponent<PowerUp>().startingPos;
+        toRespawn.transform.localScale = toRespawn.GetComponent<PowerUp>().startingSize;
+
+    }
+
     IEnumerator invisible()
     {
         invisi = true;
         yield return new WaitForSeconds(invisibleTime);
         invisi = false;
+        StartCoroutine(Respawn(objectHolding));
         holding = false;
         objectHolding = null;
         objType = "";
+        Color temp = gameObject.GetComponent<SpriteRenderer>().color;
+        temp.a = 1f;
+        gameObject.GetComponent<SpriteRenderer>().color = temp;
+        temp = ball.GetComponent<SpriteRenderer>().color;
+        temp.a = 1f;
+        ball.GetComponent<SpriteRenderer>().color = temp;
+        GameManager.Instance.UpdateUI(gameObject);
+
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.tag == "Enemy" && !invincible)
         {
-            colObjectives.objective.transform.position = transform.position;
+            bool wasHolding = false;
+            if (colObjectives.holdingObjective)
+            {
+                colObjectives.objective.transform.position = transform.position;
+                colObjectives.holdingObjective = false;
+                wasHolding = true;
+            }
 
             objectHolding = null;
             holding = false;
-            colObjectives.holdingObjective = false;
-            colObjectives.objective = null;
 
             Instantiate(deathParticles, transform.position, Quaternion.identity);
 
@@ -311,8 +344,13 @@ public class PlayerController : MonoBehaviour
                     break;
             }
 
-            colObjectives.objective.SetActive(true);
-            colObjectives.holdingObjective = false;
+            if (wasHolding)
+            {
+                colObjectives.holdingObjective = false;
+                colObjectives.objective.SetActive(true);
+                colObjectives.objective = null;
+            }
+
         }
         else
         {
