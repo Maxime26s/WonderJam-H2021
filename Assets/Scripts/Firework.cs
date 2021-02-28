@@ -66,7 +66,6 @@ public class Firework : MonoBehaviour
             }
         }
         Instantiate(collisionParticles, collision.GetContact(0).point, Quaternion.identity);
-        Debug.Log("oy");
         player.GetComponent<PlayerController>().StartRespawn(gameObject);
         //Destroy(gameObject);
     }
