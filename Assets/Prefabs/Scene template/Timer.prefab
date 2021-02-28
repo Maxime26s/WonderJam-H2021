@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 529038902515156565}
   - component: {fileID: 6877173641346677433}
   - component: {fileID: 6123125759969507147}
+  - component: {fileID: 7749819192803660355}
   m_Layer: 5
   m_Name: Cadran
   m_TagString: Untagged
@@ -210,6 +211,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &7749819192803660355
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2925360673875940366}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6188857542989594521
 GameObject:
   m_ObjectHideFlags: 0
