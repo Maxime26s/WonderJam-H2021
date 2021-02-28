@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253ecb76a50184d45a9bbe0f83743c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: "Carl au carr\xE9"
   money: 75000
 --- !u!1 &4034381656368533699
 GameObject:

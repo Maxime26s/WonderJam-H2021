@@ -21,7 +21,7 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadNextIndexAdditive()
     {
-        StartCoroutine(LoadLevelAdditive(SceneManager.GetActiveScene().buildIndex));
+        StartCoroutine(LoadLevelAdditive(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
     IEnumerator LoadLevel(int levelIndex)
@@ -34,7 +34,6 @@ public class LevelLoader : MonoBehaviour
         if(SceneManager.GetSceneByBuildIndex(levelIndex).name == "Lobby")
         {
             SceneManager.LoadScene("PlayerInfo", LoadSceneMode.Additive); //Has UI and player stats
-            Debug.Log("Ready");
         }
     }
 
@@ -59,7 +58,7 @@ public class LevelLoader : MonoBehaviour
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("Lobby"));
             oldSceneName = SceneManager.GetActiveScene().name;
         }
-        SceneManager.LoadScene(levelIndex, LoadSceneMode.Additive); //Has UI and player score
+        SceneManager.LoadScene(levelIndex, LoadSceneMode.Additive);
         yield return new WaitForSeconds(0.1f);
         SceneManager.SetActiveScene(SceneManager.GetSceneByName(SceneManager.GetSceneByBuildIndex(levelIndex).name));
         SceneManager.UnloadSceneAsync(oldSceneName);

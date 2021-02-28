@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
     public State gameState;
     public GameObject[] players;
     public GameObject timer;
-    public GameObject cam1, cam2;
 
     [Header("UI")]
     public TextMeshProUGUI textP1;
@@ -52,7 +51,7 @@ public class GameManager : MonoBehaviour
 
     public Animator timerAnimator, showcaseAnimator, summaryAnimator;
     public GameObject summary;
-    public List<GameObject> collectedP1, collectedP2;
+    public List<Sprite> collectedP1, collectedP2;
     public List<GameObject> itemsP1, itemsP2;
     public TextMeshProUGUI scorep1, scorep2, winner;
     public GameObject cameraShowcase, cameraSummary;
@@ -108,9 +107,17 @@ public class GameManager : MonoBehaviour
                 gameState = State.Playing;
                 timer.GetComponent<Timer>().running = true;
                 timer.SetActive(true);
+                showcaseAnimator.SetTrigger("Start");
+                IEnumerator WaitAndDisable()
+                {
+                    yield return new WaitForSeconds(0.5f);
+                    showcaseAnimator.transform.parent.gameObject.SetActive(false);
+                }
+                StartCoroutine(WaitAndDisable());
                 cameraShowcase.SetActive(false);
                 break;
             case State.Summary:
+                gameState = State.Stop;
                 GoNext();
                 break;
             case State.Playing:
@@ -137,11 +144,11 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < collectedP1.Count; i++)
         {
-            itemsP1[i].GetComponent<Image>().sprite = collectedP1[i].GetComponent<SpriteRenderer>().sprite;
+            itemsP1[i].GetComponent<Image>().sprite = collectedP1[i];
         }
         for (int i = 0; i < collectedP2.Count; i++)
         {
-            itemsP2[i].GetComponent<Image>().sprite = collectedP2[i].GetComponent<SpriteRenderer>().sprite;
+            itemsP2[i].GetComponent<Image>().sprite = collectedP2[i];
         }
         cameraSummary.SetActive(true);
         summary.SetActive(true);
@@ -166,7 +173,7 @@ public class GameManager : MonoBehaviour
         IEnumerator WaitBeforeShow()
         {
             yield return new WaitForSeconds(0.5f);
-            for(int i = 0; i < collectedP1.Count; i++)
+            for (int i = 0; i < collectedP1.Count; i++)
             {
                 StartCoroutine(ShowItem(0.33f, i, PlayerEnum.One));
             }
@@ -184,7 +191,7 @@ public class GameManager : MonoBehaviour
     {
         try
         {
-            policeEffect1 = GameObject.Find("P2").transform.GetChild(1).gameObject;
+            policeEffect1 = GameObject.Find("P2").transform.GetChild(0).gameObject;
             policeEffect2 = GameObject.Find("P2").transform.GetChild(0).gameObject;
         }
         catch (Exception e)
@@ -192,13 +199,10 @@ public class GameManager : MonoBehaviour
             Debug.Log(e.Message);
         }
 
-        /*
         players = GameObject.FindGameObjectsWithTag("Player");
         players[0].transform.position = spawn1.transform.position;
         players[1].transform.position = spawn2.transform.position;
-        */
 
-        /*
         title.text = world + " - " + level + "\n" + levelName;
 
         for (int i = 0; i < 6; i++)
@@ -206,18 +210,17 @@ public class GameManager : MonoBehaviour
             if (loot[i] != null)
             {
                 Objectif obj = loot[i].GetComponent<Objectif>();
-                panels[i].GetComponentInChildren<TextMeshPro>().text = obj.name + "\n" + obj.money + " $";
-                panels[i].GetComponentInChildren<Image>().sprite = loot[i].GetComponent<SpriteRenderer>().sprite;
+                panels[i].GetComponentInChildren<TextMeshProUGUI>().text = obj.name + "\n" + obj.money + " $";
+                panels[i].transform.GetChild(0).GetComponent<Image>().sprite = loot[i].GetComponentInChildren<SpriteRenderer>().sprite;
             }
             else
                 panels[i].SetActive(false);
         }
-        */
-        Setup();
     }
 
     public void Setup()
     {
+        /*
         GameObject[] cams = GameObject.FindGameObjectsWithTag("Camera");
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         GameObject[] spawns = GameObject.FindGameObjectsWithTag("Spawn");
@@ -239,7 +242,7 @@ public class GameManager : MonoBehaviour
                 cams[0].GetComponent<CinemachineVirtualCamera>().Follow = players[1].transform;
             else
                 cams[1].GetComponent<CinemachineVirtualCamera>().Follow = players[1].transform;
-        }
+        }*/
     }
 
     public void UpdateUI(GameObject player)
@@ -323,6 +326,7 @@ public class GameManager : MonoBehaviour
     {
         Showcase,
         Summary,
-        Playing
+        Playing,
+        Stop
     }
 }
