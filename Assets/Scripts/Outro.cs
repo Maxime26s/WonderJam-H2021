@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Outro : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Outro : MonoBehaviour
     public GameObject text;
     public GameObject[] cars;
     public GameObject[] balls;
+    public GameObject[] players;
 
     public float streetMoveSpeed;
     public float buildingMoveSpeed;
@@ -27,8 +29,19 @@ public class Outro : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = balls[0];
-        balls[0].SetActive(true);
+        players = GameObject.FindGameObjectsWithTag("Player");
+        if(players[0].GetComponent<ColObjectives>().cash > players[1].GetComponent<ColObjectives>().cash)
+        {
+            player = balls[0];
+            text.GetComponent<TextMeshProUGUI>().text = "Player 1 won.. but at what cost \n \n Player 1 : " + players[0].GetComponent<ColObjectives>().cash + "$ \n Player 2 : " + players[1].GetComponent<ColObjectives>().cash + "$";
+        }
+        else
+        {
+            player = balls[1];
+            text.GetComponent<TextMeshProUGUI>().text = "Player 2 won.. but at what cost \n \n Player 2 : " + players[1].GetComponent<ColObjectives>().cash + "$ \n Player 1 : " + players[0].GetComponent<ColObjectives>().cash + "$";
+        }
+
+        player.SetActive(true);
 
         for (int i = 0; i < cars.Length; i++)
             initialCars[i] = cars[i].transform.position;
@@ -105,11 +118,13 @@ public class Outro : MonoBehaviour
 
     public IEnumerator MoveText()
     {
-        for (float i = -550f; i < 0f; i += textMoveSpeed * Time.deltaTime)
+        for (float i = -1080f; i < 0f; i += textMoveSpeed * Time.deltaTime)
         {
             text.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, text.GetComponent<RectTransform>().anchoredPosition.y + textMoveSpeed * Time.deltaTime, 0);
             yield return null;
         }
+
+        yield return new WaitForSeconds(2f);
         over = true;
     }
 

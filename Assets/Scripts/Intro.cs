@@ -108,7 +108,7 @@ public class Intro : MonoBehaviour
 
     public IEnumerator MoveText()
     {
-        for (float i = -550f; i < 1400f; i += textMoveSpeed * Time.deltaTime)
+        for (float i = 1083f; i > -2220f; i -= textMoveSpeed * Time.deltaTime)
         {
             text.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, text.GetComponent<RectTransform>().anchoredPosition.y + textMoveSpeed * Time.deltaTime, 0);
             yield return null;
@@ -160,7 +160,7 @@ public class Intro : MonoBehaviour
     public IEnumerator MoveBall()
     {
         yield return new WaitForSeconds(22f);
-        for (float i = 0f; i > -16f; i -= streetMoveSpeed * Time.deltaTime)
+        for (float i = 0f; i > -15f; i -= streetMoveSpeed * Time.deltaTime)
         {
             ball.transform.position = new Vector3(ball.transform.position.x - streetMoveSpeed * Time.deltaTime, ball.transform.position.y, 0);
             yield return null;
