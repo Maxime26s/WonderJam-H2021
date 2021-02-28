@@ -22,7 +22,11 @@ EditorUserSettings:
       value: 22424703114646680e0b0227036c6b020f1f1938286708353a692e30e7ee3176f7e93ffdfe
       flags: 0
     RecentlyUsedScenePath-5:
+<<<<<<< HEAD
+      value: 22424703114646680e0b0227036c73150012146a7d66757e38271427fb
+=======
       value: 22424703114646680e0b0227036c73150012146a7d66333e243d04
+>>>>>>> main
       flags: 0
     RecentlyUsedScenePath-6:
       value: 22424703114646680e0b0227036c6b020f1f193828670a353b2c1173b3ad6576f7e93ffdfe
@@ -31,6 +35,12 @@ EditorUserSettings:
       value: 22424703114646680e0b0227036c73150012146a7d787660633c133af6f9
       flags: 0
     RecentlyUsedScenePath-8:
+<<<<<<< HEAD
+      value: 22424703114646680e0b0227036c6b020f1f19382867032024251234f7e57a2decee22f0
+      flags: 0
+    RecentlyUsedScenePath-9:
+      value: 22424703114646680e0b0227036c6b020f1f193828670b35233c5326ece92021
+=======
       value: 22424703114646680e0b0227036c6b020f1f193828670a353b2c1173b3ad6276f7e93ffdfe
       flags: 0
     RecentlyUsedScenePath-9:
@@ -94,6 +104,7 @@ EditorUserSettings:
       value: 22424703114646680e0b0227036c73150012147f623d28393930
 >>>>>>> 39-level1-fonctionnel
 >>>>>>> ghuyb
+>>>>>>> main
       flags: 0
     vcSharedLogLevel:
       value: 0d5e400f0650
