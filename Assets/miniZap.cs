@@ -9,9 +9,6 @@ public class miniZap : MonoBehaviour
     { 
         papa.tp(collision, gameObject);
     }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        papa.leaving(gameObject);
-    }
+    
 
 }
