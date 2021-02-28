@@ -287,10 +287,17 @@ public class PlayerController : MonoBehaviour
 
         toRespawn.SetActive(false);
         yield return new WaitForSeconds(to);
-        toRespawn.SetActive(true);
-        toRespawn.GetComponent<PowerUp>().used = false;
-        toRespawn.transform.position = toRespawn.GetComponent<PowerUp>().startingPos;
-        toRespawn.transform.localScale = toRespawn.GetComponent<PowerUp>().startingSize;
+        try
+        {
+            toRespawn.SetActive(true);
+            toRespawn.GetComponent<PowerUp>().used = false;
+            toRespawn.transform.position = toRespawn.GetComponent<PowerUp>().startingPos;
+            toRespawn.transform.localScale = toRespawn.GetComponent<PowerUp>().startingSize;
+        }catch(Exception e)
+        {
+            Debug.Log(e);
+        }
+        
 
     }
 
